@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Recodme.ShokuDex.Data.Base
 {
-    public class DescribedEntity : NamedEntity
+    public abstract class DescribedEntity : NamedEntity
     {
         private string _description;
         [Required]
