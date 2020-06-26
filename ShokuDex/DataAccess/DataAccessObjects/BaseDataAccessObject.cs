@@ -48,12 +48,12 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         #region Update
         public void Update(T item)
         {
-            _context.Entry(T).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             _context.SaveChanges();
         }
         public async Task UpdateAsync(T item)
         {
-            _context.Entry(T).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
         #endregion
