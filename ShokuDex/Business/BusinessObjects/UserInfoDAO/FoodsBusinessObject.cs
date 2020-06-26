@@ -1,5 +1,5 @@
 ﻿using Recodme.ShokuDex.Business.OperationResults;
-using Recodme.ShokuDex.Data.UserInfo;
+using Recodme.ShokuDex.Data.FoodInfo;
 using Recodme.ShokuDex.DataAccess.DataAccessObjects;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,13 @@ using System.Transactions;
 
 namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
 {
-    public class ProfileBusinessObject
+    public class FoodsBusinessObject
     {
-        private BaseDataAccessObject<Profiles> _dao;
+        private BaseDataAccessObject<Foods> _dao;
 
-        public ProfileBusinessObject()
+        public FoodsBusinessObject()
         {
-            _dao = new BaseDataAccessObject<Profiles>();
+            _dao = new BaseDataAccessObject<Foods>();
         }
 
         private TransactionOptions opts = new TransactionOptions
@@ -26,7 +26,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
 
         #region C
 
-        public OperationResult Create(Profiles item)
+        public OperationResult Create(Foods item)
         {
             try
             {
@@ -35,13 +35,13 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 scope.Complete();
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
 
-        public async Task<OperationResult> CreateAsync(Profiles item)
+        public async Task<OperationResult> CreateAsync(Foods item)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 scope.Complete();
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
@@ -60,33 +60,33 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
 
         #region R
 
-        public OperationResult<Profiles> Read(Guid id)
+        public OperationResult<Foods> Read(Guid id)
         {
             try
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = _dao.Read(id);
                 scope.Complete();
-                return new OperationResult<Profiles>() { Success = true, Result = res };
+                return new OperationResult<Foods>() { Success = true, Result = res };
             }
             catch (Exception e)
             {
-                return new OperationResult<Profiles>() { Success = false, Exception = e };
+                return new OperationResult<Foods>() { Success = false, Exception = e };
             }
         }
 
-        public async Task<OperationResult<Profiles>> ReadAsync(Guid id)
+        public async Task<OperationResult<Foods>> ReadAsync(Guid id)
         {
             try
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = await _dao.ReadAsync(id);
                 scope.Complete();
-                return new OperationResult<Profiles>() { Success = true, Result = res }; 
+                return new OperationResult<Foods>() { Success = true, Result = res };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return new OperationResult<Profiles>() { Success = true, Exception = e };
+                return new OperationResult<Foods>() { Success = true, Exception = e };
             }
         }
 
@@ -94,7 +94,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
 
         #region U
 
-        public OperationResult Update(Profiles item)
+        public OperationResult Update(Foods item)
         {
             try
             {
@@ -103,13 +103,13 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 scope.Complete();
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
 
-        public async Task<OperationResult> UpdateAsync(Profiles item)
+        public async Task<OperationResult> UpdateAsync(Foods item)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 await _dao.UpdateAsync(item);
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
@@ -126,7 +126,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
 
         #region D
 
-        public OperationResult Delete(Profiles item)
+        public OperationResult Delete(Foods item)
         {
             try
             {
@@ -135,13 +135,13 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 scope.Complete();
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
         }
-        
-        public async Task<OperationResult> DeleteAsync(Profiles item)
+
+        public async Task<OperationResult> DeleteAsync(Foods item)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
                 scope.Complete();
                 return new OperationResult() { Success = true };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new OperationResult() { Success = false, Exception = e };
             }
