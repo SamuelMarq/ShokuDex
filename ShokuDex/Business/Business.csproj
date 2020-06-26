@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessObjects\" />
+    <Folder Include="BusinessObjects\FoodInfoDAO\" />
+    <Folder Include="BusinessObjects\Other\" />
+    <Folder Include="BusinessObjects\UserInfoDAO\" />
     <Folder Include="OperationResults\" />
   </ItemGroup>
 

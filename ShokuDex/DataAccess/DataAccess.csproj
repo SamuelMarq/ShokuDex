@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataAccessObjects\Base\**" />
+    <EmbeddedResource Remove="DataAccessObjects\Base\**" />
+    <None Remove="DataAccessObjects\Base\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -22,10 +28,15 @@
 
   <ItemGroup>
     <Folder Include="Contexts\" />
-    <Folder Include="DataAccessObjects\FoodInfoDAO\" />
-    <Folder Include="DataAccessObjects\Base\" />
-    <Folder Include="DataAccessObjects\UserInfoDAO\" />
-    <Folder Include="DataAccessObjects\Other\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
 </Project>
