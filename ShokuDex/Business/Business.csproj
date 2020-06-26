@@ -8,8 +8,10 @@
   <ItemGroup>
     <Folder Include="BusinessObjects\FoodInfoDAO\" />
     <Folder Include="BusinessObjects\Other\" />
-    <Folder Include="BusinessObjects\UserInfoDAO\" />
-    <Folder Include="OperationResults\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
