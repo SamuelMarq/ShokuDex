@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Recodme.ShokuDex.Data</RootNamespace>
+    <RootNamespace>Recodme.ShokuDex.Business</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FoodInfo\" />
-    <Folder Include="Other\" />
-    <Folder Include="UserInfo\" />
+    <Folder Include="BusinessObjects\" />
+    <Folder Include="OperationResults\" />
   </ItemGroup>
 
 </Project>
