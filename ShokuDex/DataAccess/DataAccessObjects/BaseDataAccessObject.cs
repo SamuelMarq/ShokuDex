@@ -19,13 +19,13 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         #region Create
         public void Create(T item)
         {
-            _context.Set<T>.Add(item);
+            _context.Set<T>().Add(item);
             _context.SaveChanges();
         }
 
         public async Task CreateAsync(T item)
         {
-            await _context.Set<T>.AddAsync(item);
+            await _context.Set<T>().AddAsync(item);
             await _context.SaveChangesAsync();
         }
         #endregion
@@ -33,14 +33,14 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         #region Read
         public T Read(Guid id)
         {
-            return _context.Set<T>.FirstOrDefault(x => x.Id == id);
+            return _context.Set<T>().FirstOrDefault(x => x.Id == id);
         }
         public async Task<T> ReadAsync(Guid id)
         {
             return await
                 new Task<T>
                 (
-                    () => _context.Set<T>.FirstOrDefault(x => x.Id == id)
+                    () => _context.Set<T>().FirstOrDefault(x => x.Id == id)
                 );
         }
         #endregion
