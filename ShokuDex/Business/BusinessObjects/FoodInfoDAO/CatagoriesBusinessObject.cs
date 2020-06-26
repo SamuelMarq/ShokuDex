@@ -1,4 +1,5 @@
-﻿using Recodme.ShokuDex.Data.FoodInfo;
+﻿using Recodme.ShokuDex.Business.OperationResults;
+using Recodme.ShokuDex.Data.FoodInfo;
 using Recodme.ShokuDex.DataAccess.DataAccessObjects;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = _dao.Read(id);
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult<Categories>() { Success = true, Result = res };
             }
             catch (Exception e)
@@ -75,7 +76,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = await _dao.ReadAsync(id);
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult<Categories>() { Success = true, Result = res };
             }
             catch (Exception e)
@@ -92,7 +93,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 _dao.Update(item);
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
@@ -125,7 +126,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 _dao.Delete(item);
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
@@ -157,7 +158,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 _dao.Delete(id);
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult() { Success = true };
             }
             catch (Exception e)
@@ -190,7 +191,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = _dao.List();
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult<List<Categories>>() { Success = true, Result = res };
             }
             catch (Exception e)
@@ -205,7 +206,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
             {
                 var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
                 var res = await _dao.ListAsync();
-                transactionScope.Complete();
+                scope.Complete();
                 return new OperationResult<List<Categories>>() { Success = true, Result = res };
             }
             catch (Exception e)
