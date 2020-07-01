@@ -231,7 +231,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var list = _dao.List();
                   
                     var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && !x.IsDeleted); 
+                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory && !x.IsDeleted ); 
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
