@@ -188,9 +188,8 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = _dao.List();
-                    var res = (List<Foods>)list.Where(x => !x.IsDeleted);
                     scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
+                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
                 }
             }
             catch (Exception e)
@@ -206,7 +205,45 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = await _dao.ListAsync();
-                    var res = (List<Foods>)list.Where(x =>!x.IsDeleted);
+                    scope.Complete();
+                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
+                }
+
+            }
+
+            catch (Exception e)
+            {
+                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
+            }
+        }
+
+
+        public OperationResult<List<Foods>> FullList()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+                    var res = (List<Foods>)list.Where(x => !x.IsDeleted);
+                    scope.Complete();
+                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult> FullListAsync()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = await _dao.ListAsync();
+                    var res = (List<Foods>)list.Where(x => !x.IsDeleted);
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
@@ -218,7 +255,6 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 return new OperationResult<List<Foods>>() { Success = false, Exception = e };
             }
         }
-
         #endregion
 
         #region Find
@@ -233,7 +269,30 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var list = _dao.List();
                   
                     var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory && !x.IsDeleted ); 
+                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory); 
+                    scope.Complete();
+                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
+                }
+
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
+            }
+        }
+
+
+        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory)
+        {
+            try
+            {
+
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+
+                    var regex = new Regex("^" + searchFood);
+                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory && !x.IsDeleted);
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
