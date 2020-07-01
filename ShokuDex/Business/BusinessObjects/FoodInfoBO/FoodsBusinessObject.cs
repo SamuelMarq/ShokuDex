@@ -32,6 +32,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         {
             try
             {
+                food.Calories = food.Fats * 9 + food.Carbohydrates * 4 + food.Protein * 4 + food.Alcohol * 7;
                 _dao.Create(food);
                 return new OperationResult() { Success = true };
             }
@@ -45,6 +46,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         {
             try
             {
+                food.Calories = food.Fats * 9 + food.Carbohydrates * 4 + food.Protein * 4 + food.Alcohol * 7;
                 await _dao.CreateAsync(food);
                 return new OperationResult() { Success = true };
             }
