@@ -9,13 +9,16 @@
     <Folder Include="Controllers\FoodInfo\" />
     <Folder Include="Controllers\Other\" />
     <Folder Include="Controllers\UserInfo\" />
-    <Folder Include="Models\FoodInfo\" />
     <Folder Include="Models\Other\" />
     <Folder Include="Models\UserInfo\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
 </Project>
