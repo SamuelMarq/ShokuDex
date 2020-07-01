@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Recodme.ShokuDex.WebApi.Models;
+using WebApi.Models;
 
 namespace Recodme.ShokuDex.WebApi.Controllers
 {

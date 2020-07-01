@@ -1,6 +1,6 @@
 using System;
 
-namespace Recodme.ShokuDex.WebApi.Models
+namespace WebApi.Models
 {
     public class ErrorViewModel
     {
