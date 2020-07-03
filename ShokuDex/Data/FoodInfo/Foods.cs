@@ -106,14 +106,14 @@ namespace Recodme.ShokuDex.Data.FoodInfo
         public Guid ProfileId { get; set; }
 
         [ForeignKey("Categories")]
-        public Guid CategoriesId { get; set; }
+        public Guid CategoryId { get; set; }
         
 
         public virtual Categories Categories { get; set; }
 
 
         public Foods(string name, string description, double fats, double carbohydrates, double protein, double alcohol, 
-                    double calories, double portion, string photo, bool isRecipe, Guid profileId, Guid categoriesId) : base(name, description)
+                    double calories, double portion, string photo, bool isRecipe, Guid profileId, Guid categoryId) : base(name, description)
         {
             _fats = fats;
             _carbohydrates = carbohydrates;
@@ -124,12 +124,12 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             _photo = photo;
             _isRecipe = isRecipe;
             ProfileId = profileId;
-            CategoriesId = categoriesId;
+            CategoryId = categoryId;
         }
 
         public Foods(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted, string name, string description, 
                     double fats, double carbohydrates, double protein, double alcohol, double calories, double portion, 
-                    string photo, bool isRecipe, Guid profileId, Guid categoriesId) : base(id, createdAt, updatedAd, isDeleted, name, description)
+                    string photo, bool isRecipe, Guid profileId, Guid categoryId) : base(id, createdAt, updatedAd, isDeleted, name, description)
         {
             _fats = fats;
             _carbohydrates = carbohydrates;
@@ -140,7 +140,12 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             _photo = photo;
             _isRecipe = isRecipe;
             ProfileId = profileId;
-            CategoriesId = categoriesId;
+            CategoryId = categoryId;
+        }
+
+        private Foods() : base(string.Empty, string.Empty)
+        {
+
         }
     }
 }

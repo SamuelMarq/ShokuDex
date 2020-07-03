@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recodme.ShokuDex.DataAccess.Contexts;
+using System;
 
 namespace Recodme.ShokuDex.App
 {
@@ -6,8 +7,8 @@ namespace Recodme.ShokuDex.App
     {
         static void Main(string[] args)
         {
-            //var ctx = new FoodLogContext();
-            //ctx.DataBase.EnsureCreated();
+            var ctx = new FoodLogContext();
+            ctx.Database.EnsureCreated();
 
 
         }

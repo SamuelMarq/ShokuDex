@@ -6,4 +6,8 @@
     <RootNamespace>Recodme.ShokuDex.App</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Recodme.ShokuDex.WebApi.ExtraMethods;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
+using Recodme.ShokuDex.Data.FoodInfo;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
 {
@@ -45,7 +46,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
                 fvm.Photo = res.Result.Photo;
                 fvm.IsRecipe = res.Result.IsRecipe;
                 fvm.ProfileId = res.Result.ProfileId;
-                fvm.CategoryId = res.Result.CategoriesId;
+                fvm.CategoryId = res.Result.CategoryId;
                 return fvm;
             }
             else return StatusCode((int)HttpStatusCode.InternalServerError);
@@ -73,25 +74,10 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (current.Name == f.Name && current.Description == f.Description &&
-                current.Fats == f.Fats && current.Carbohydrates == f.Carbohydrates && current.Protein == f.Protein 
-                && current.Alcohol == f.Alcohol && current.Calories == f.Calories && current.Portion == f.Portion &&
-                current.Photo == f.Photo && current.IsRecipe == f.IsRecipe && current.ProfileId == f.ProfileId &&
-                current.CategoriesId == f.CategoryId) return StatusCode((int)HttpStatusCode.NotModified);
+            if (SupportMethods.Equals<FoodViewModel, Foods>(f, current)) return StatusCode((int)HttpStatusCode.NotModified);
 
 
-            if (current.Name != f.Name) current.Name = f.Name;
-            if (current.Description != f.Description) current.Description = f.Description;
-            if (current.Fats != f.Fats) current.Fats = f.Fats;
-            if (current.Carbohydrates != f.Carbohydrates) current.Carbohydrates = f.Carbohydrates;
-            if (current.Protein != f.Protein) current.Protein = f.Protein;
-            if (current.Alcohol != f.Alcohol) current.Alcohol = f.Alcohol;
-            if (current.Calories != f.Calories) current.Calories = f.Calories;
-            if (current.Protein != f.Protein) current.Protein = f.Protein;
-            if (current.Photo != f.Photo) current.Photo = f.Photo;
-            if (current.IsRecipe != f.IsRecipe) current.IsRecipe = f.IsRecipe;
-            if (current.ProfileId != f.ProfileId) current.ProfileId = f.ProfileId;
-            if (current.CategoriesId != f.CategoryId) current.CategoriesId= f.CategoryId;
+            current = SupportMethods.Update<FoodViewModel, Foods>(f, current);
 
             var updateResult = _bo.Update(current);
             if (!updateResult.Success) return StatusCode((int)HttpStatusCode.InternalServerError);

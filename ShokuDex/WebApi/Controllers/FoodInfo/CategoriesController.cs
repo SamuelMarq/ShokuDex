@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO;
+using Recodme.ShokuDex.Data.FoodInfo;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
+using Recodme.ShokuDex.WebApi.ExtraMethods;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
 {
@@ -62,10 +64,10 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (current.Name== cc.Name) return StatusCode((int)HttpStatusCode.NotModified);
+            if(SupportMethods.Equals<CategoryViewModel, Categories>(cc, current)) return StatusCode((int)HttpStatusCode.NotModified);
 
 
-            if (current.Name != cc.Name) current.Name = cc.Name;
+            current = SupportMethods.Update<CategoryViewModel, Categories>(cc, current);
             
 
             var updateResult = _bo.Update(current);
