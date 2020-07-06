@@ -269,7 +269,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var list = _dao.List();
                   
                     var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory); 
+                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory); 
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
@@ -292,7 +292,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var list = _dao.List();
 
                     var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoriesId == idCategory && !x.IsDeleted);
+                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted);
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
