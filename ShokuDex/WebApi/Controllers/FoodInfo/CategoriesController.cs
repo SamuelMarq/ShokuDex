@@ -17,10 +17,10 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
         private readonly CategoriesBusinessObject _bo = new CategoriesBusinessObject();
 
         [HttpPost]
-        public ActionResult Create([FromBody]CategoryViewModel vm)
+        public ActionResult Create([FromBody]CategoryViewModel cvm)
         {
-            var cc = vm.ToCategory();
-            var res = _bo.Create(cc);
+            var c = cvm.ToCategory();
+            var res = _bo.Create(c);
             return StatusCode(res.Success ? (int)HttpStatusCode.OK : (int)HttpStatusCode.InternalServerError);
         }
 
@@ -31,11 +31,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             if (res.Success)
             {
                 if (res.Result == null) return NotFound();
-                var ccvm = new CategoryViewModel();
-                ccvm.Id = res.Result.Id;
-                ccvm.Name = res.Result.Name;
+                var cvm = new CategoryViewModel();
+                cvm.Id = res.Result.Id;
+                cvm.Name = res.Result.Name;
                
-                return ccvm;
+                return cvm;
             }
             else return StatusCode((int)HttpStatusCode.InternalServerError);
         }
@@ -55,17 +55,17 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] CategoryViewModel cc)
+        public ActionResult Update([FromBody] CategoryViewModel c)
         {
-            var currentRes = _bo.Read(cc.Id);
+            var currentRes = _bo.Read(c.Id);
             if (!currentRes.Success) return StatusCode((int)HttpStatusCode.InternalServerError);
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (current.Name== cc.Name) return StatusCode((int)HttpStatusCode.NotModified);
+            if (current.Name== c.Name) return StatusCode((int)HttpStatusCode.NotModified);
 
 
-            if (current.Name != cc.Name) current.Name = cc.Name;
+            if (current.Name != c.Name) current.Name = c.Name;
             
 
             var updateResult = _bo.Update(current);

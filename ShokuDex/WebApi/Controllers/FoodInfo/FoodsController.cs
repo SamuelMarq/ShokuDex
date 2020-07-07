@@ -17,9 +17,9 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
         private readonly FoodsBusinessObject _bo = new FoodsBusinessObject();
 
         [HttpPost]
-        public ActionResult Create([FromBody]FoodViewModel vm)
+        public ActionResult Create([FromBody]FoodViewModel fvm)
         {
-            var f = vm.ToFood();
+            var f = fvm.ToFood();
             var res = _bo.Create(f);
             return StatusCode(res.Success ? (int)HttpStatusCode.OK : (int)HttpStatusCode.InternalServerError);
         }
@@ -31,24 +31,10 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             if (res.Success)
             {
                 if (res.Result == null) return NotFound();
-                var fvm = new FoodViewModel();
-                fvm.Id = res.Result.Id;
-                fvm.Name = res.Result.Name;
-                fvm.Description = res.Result.Description;
-                fvm.Fats = res.Result.Fats;
-                fvm.Carbohydrates = res.Result.Carbohydrates;
-                fvm.Protein = res.Result.Protein;
-                fvm.Calories = res.Result.Calories;
-                fvm.Alcohol = res.Result.Alcohol;
-                fvm.Calories = res.Result.Calories;
-                fvm.Portion = res.Result.Portion;
-                fvm.Photo = res.Result.Photo;
-                fvm.IsRecipe = res.Result.IsRecipe;
-                fvm.ProfileId = res.Result.ProfileId;
-                fvm.CategoryId = res.Result.CategoriesId;
+                var fvm = FoodViewModel.Parse(res.Result);
                 return fvm;
             }
-            else return StatusCode((int)HttpStatusCode.InternalServerError);
+            else return StatusCode((int)HttpStatusCode.InternalServerError);;
         }
 
         [HttpGet]
@@ -73,11 +59,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (current.Name == f.Name && current.Description == f.Description &&
-                current.Fats == f.Fats && current.Carbohydrates == f.Carbohydrates && current.Protein == f.Protein 
-                && current.Alcohol == f.Alcohol && current.Calories == f.Calories && current.Portion == f.Portion &&
-                current.Photo == f.Photo && current.IsRecipe == f.IsRecipe && current.ProfileId == f.ProfileId &&
-                current.CategoriesId == f.CategoryId) return StatusCode((int)HttpStatusCode.NotModified);
+            if (support) return StatusCode((int)HttpStatusCode.NotModified);
 
 
             if (current.Name != f.Name) current.Name = f.Name;
