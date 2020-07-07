@@ -177,45 +177,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
 
         #endregion
 
-
         #region List
-
-        public OperationResult<List<Categories>> List()
-        {
-            try
-            {
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var list = _dao.List();
-                    scope.Complete();
-                    return new OperationResult<List<Categories>>() { Success = true, Result = list };
-                }
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Categories>>() { Success = false, Exception = e };
-            }
-        }
-
-        public async Task<OperationResult> ListAsync()
-        {
-            try
-            {
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var list = await _dao.ListAsync();
-                    scope.Complete();
-                    return new OperationResult<List<Categories>>() { Success = true, Result = list };
-                }
-
-            }
-
-            catch (Exception e)
-            {
-                return new OperationResult<List<Categories>>() { Success = false, Exception = e };
-            }
-        }
-
 
         public OperationResult<List<Categories>> FullList()
         {
@@ -224,9 +186,8 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = _dao.List();
-                    var res = (List<Categories>)list.Where(x => !x.IsDeleted);
                     scope.Complete();
-                    return new OperationResult<List<Categories>>() { Success = true, Result = res };
+                    return new OperationResult<List<Categories>>() { Success = true, Result = list };
                 }
             }
             catch (Exception e)
@@ -242,7 +203,46 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = await _dao.ListAsync();
-                    var res = (List<Categories>)list.Where(x => !x.IsDeleted);
+                    scope.Complete();
+                    return new OperationResult<List<Categories>>() { Success = true, Result = list };
+                }
+
+            }
+
+            catch (Exception e)
+            {
+                return new OperationResult<List<Categories>>() { Success = false, Exception = e };
+            }
+        }
+
+
+        public OperationResult<List<Categories>> List()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
+                    
+                    scope.Complete();
+                    return new OperationResult<List<Categories>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Categories>>() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult> ListAsync()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = await _dao.ListAsync();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
                     scope.Complete();
                     return new OperationResult<List<Categories>>() { Success = true, Result = res };
                 }

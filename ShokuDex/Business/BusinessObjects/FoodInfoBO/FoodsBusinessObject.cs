@@ -181,43 +181,6 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
 
         #region List
 
-        public OperationResult<List<Foods>> List()
-        {
-            try
-            {
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var list = _dao.List();
-                    scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
-                }
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
-            }
-        }
-
-        public async Task<OperationResult> ListAsync()
-        {
-            try
-            {
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var list = await _dao.ListAsync();
-                    scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
-                }
-
-            }
-
-            catch (Exception e)
-            {
-                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
-            }
-        }
-
-
         public OperationResult<List<Foods>> FullList()
         {
             try
@@ -225,9 +188,8 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = _dao.List();
-                    var res = (List<Foods>)list.Where(x => !x.IsDeleted);
                     scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
+                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
                 }
             }
             catch (Exception e)
@@ -243,7 +205,45 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = await _dao.ListAsync();
-                    var res = (List<Foods>)list.Where(x => !x.IsDeleted);
+                    scope.Complete();
+                    return new OperationResult<List<Foods>>() { Success = true, Result = list };
+                }
+
+            }
+
+            catch (Exception e)
+            {
+                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
+            }
+        }
+
+
+        public OperationResult<List<Foods>> List()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
+                    scope.Complete();
+                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult> ListAsync()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = await _dao.ListAsync();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
@@ -259,7 +259,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
 
         #region Find
 
-        public OperationResult<List<Foods>> Find(string searchFood, Guid idCategory)
+        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory)
         {
             try
             {
@@ -269,7 +269,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var list = _dao.List();
                   
                     var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory); 
+                    var res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory).ToList(); 
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
@@ -282,7 +282,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         }
 
 
-        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory)
+        public OperationResult<List<Foods>> Find(string searchFood, Guid idCategory)
         {
             try
             {
@@ -291,8 +291,8 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 {
                     var list = _dao.List();
 
-                    var regex = new Regex("^" + searchFood);
-                    var res = (List<Foods>)list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted);
+                    var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
+                    var res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted).ToList();
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
