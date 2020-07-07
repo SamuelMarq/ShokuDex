@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Recodme.ShokuDex.Data.FoodInfo;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
 {
@@ -33,33 +36,16 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
                 Name = obj.Name,
                 Description = obj.Description,
                 Fats = obj.Fats,
-                Carbohydrates=obj.Carbohydrates,
-                Protein=obj.Protein,
-                Alcohol=obj.Alcohol,
-                Calories=obj.Calories,
-                Portion=obj.Portion,
-                Photo=obj.Photo,
-                IsRecipe=obj.IsRecipe,
-                ProfileId=obj.ProfileId,
-                CategoryId=obj.CategoriesId
+                Carbohydrates = obj.Carbohydrates,
+                Protein = obj.Protein,
+                Alcohol = obj.Alcohol,
+                Calories = obj.Calories,
+                Portion = obj.Portion,
+                Photo = obj.Photo,
+                IsRecipe = obj.IsRecipe,
+                ProfileId = obj.ProfileId,
+                CategoryId = obj.CategoryId
             };
-        }
-
-        public bool Equals(Foods obj)
-        {
-            bool res = (Id == obj.Id);
-            if (res) res = (Name == obj.Name); else return false;
-            if (res) res = (Description == obj.Description); else return false;
-            if (res) res = (Fats == obj.Fats); else return false;
-            if (res) res = (Carbohydrates == obj.Carbohydrates); else return false;
-            if (res) res = (Protein == obj.Protein); else return false;
-            if (res) res = (Alcohol == obj.Alcohol); else return false;
-            if (res) res = (Portion == obj.Portion); else return false;
-            if (res) res = (Photo == obj.Photo); else return false;
-            if (res) res = (IsRecipe == obj.IsRecipe); else return false;
-            if (res) res = (ProfileId == obj.ProfileId); else return false;
-            if (res) res = (CategoryId == obj.CategoriesId);
-            return res;
         }
     }
 }
