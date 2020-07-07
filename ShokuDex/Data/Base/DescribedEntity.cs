@@ -6,7 +6,6 @@ namespace Recodme.ShokuDex.Data.Base
     public abstract class DescribedEntity : NamedEntity
     {
         private string _description;
-        [Required]
         public string Description
         {
             get => _description;
