@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
+using Recodme.ShokuDex.WebApi.ExtraMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
@@ -51,29 +52,32 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             return list;
         }
 
-        [HttpPut]
-        public ActionResult Update([FromBody] FoodViewModel f)
+        [HttpGet]
+        public ActionResult<List<FoodViewModel>> Find([FromBody] string searchFood, Guid id)
         {
-            var currentRes = _bo.Read(f.Id);
+            var res = _bo.Find(searchFood, id);
+            if (!res.Success) StatusCode((int)HttpStatusCode.InternalServerError);
+            var list = new List<FoodViewModel>();
+            foreach (var item in res.Result)
+            {
+                list.Add(FoodViewModel.Parse(item));
+            }
+
+            return list;
+        }
+
+        [HttpPut]
+        public ActionResult Update([FromBody] FoodViewModel fvm)
+        {
+            var currentRes = _bo.Read(fvm.Id);
             if (!currentRes.Success) return StatusCode((int)HttpStatusCode.InternalServerError);
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (support) return StatusCode((int)HttpStatusCode.NotModified);
+            if (SupportMethods.Equals(fvm, current)) return StatusCode((int)HttpStatusCode.NotModified);
 
-
-            if (current.Name != f.Name) current.Name = f.Name;
-            if (current.Description != f.Description) current.Description = f.Description;
-            if (current.Fats != f.Fats) current.Fats = f.Fats;
-            if (current.Carbohydrates != f.Carbohydrates) current.Carbohydrates = f.Carbohydrates;
-            if (current.Protein != f.Protein) current.Protein = f.Protein;
-            if (current.Alcohol != f.Alcohol) current.Alcohol = f.Alcohol;
-            if (current.Calories != f.Calories) current.Calories = f.Calories;
-            if (current.Protein != f.Protein) current.Protein = f.Protein;
-            if (current.Photo != f.Photo) current.Photo = f.Photo;
-            if (current.IsRecipe != f.IsRecipe) current.IsRecipe = f.IsRecipe;
-            if (current.ProfileId != f.ProfileId) current.ProfileId = f.ProfileId;
-            if (current.CategoriesId != f.CategoryId) current.CategoriesId= f.CategoryId;
+            current = SupportMethods.Update(fvm, current);
+      
 
             var updateResult = _bo.Update(current);
             if (!updateResult.Success) return StatusCode((int)HttpStatusCode.InternalServerError);
@@ -87,5 +91,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             if (result.Success) return Ok();
             return StatusCode((int)HttpStatusCode.InternalServerError);
         }
+
+
     }
 }

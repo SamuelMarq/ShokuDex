@@ -8,7 +8,7 @@ namespace Recodme.ShokuDex.App
         static void Main(string[] args)
         {
             var ctx = new FoodLogContext();
-            ctx.Database.EnsureCreated();
+            ctx.database.EnsureCreated();
         }
     }
 }

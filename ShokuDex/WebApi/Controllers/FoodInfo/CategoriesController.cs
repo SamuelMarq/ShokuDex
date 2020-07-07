@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO;
+using Recodme.ShokuDex.WebApi.ExtraMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
@@ -31,9 +32,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
             if (res.Success)
             {
                 if (res.Result == null) return NotFound();
-                var cvm = new CategoryViewModel();
-                cvm.Id = res.Result.Id;
-                cvm.Name = res.Result.Name;
+                var cvm = CategoryViewModel.Parse(res.Result);
                
                 return cvm;
             }
@@ -55,18 +54,16 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] CategoryViewModel c)
+        public ActionResult Update([FromBody] CategoryViewModel cvm)
         {
-            var currentRes = _bo.Read(c.Id);
+            var currentRes = _bo.Read(cvm.Id);
             if (!currentRes.Success) return StatusCode((int)HttpStatusCode.InternalServerError);
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (current.Name== c.Name) return StatusCode((int)HttpStatusCode.NotModified);
+            if (SupportMethods.Equals(cvm, current)) return StatusCode((int)HttpStatusCode.NotModified);
 
-
-            if (current.Name != c.Name) current.Name = c.Name;
-            
+            current = SupportMethods.Update(cvm, current);
 
             var updateResult = _bo.Update(current);
             if (!updateResult.Success) return StatusCode((int)HttpStatusCode.InternalServerError);
