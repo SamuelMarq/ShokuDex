@@ -36,9 +36,10 @@ namespace TestLibrary
         {
             var _bo = new FoodsBusinessObject();
             var res = _bo.Read(Guid.Parse("5ABA9C14-D64E-42DC-BD8C-08D8228AFBF6"));
-            bool adelaide = res.Result.Alcohol == 1 && res.Result.Calories == 24 && res.Result.Carbohydrates == 1 && res.Result.Fats == 1 && res.Result.Portion == 1 && res.Result.Protein == 1 && res.Result.Name == "arroz doce" && res.Result.Photo == "arroz" && res.Result.IsDeleted == false;
+            var food = res.Result;
+            bool isEqual = food.Alcohol == 1 && food.Calories == 24 && food.Carbohydrates == 1 && food.Fats == 1 && food.Portion == 1 && food.Protein == 1 && food.Name == "arroz doce" && food.Photo == "arroz" && food.IsRecipe == false && food.Description == "arroz";
 
-            Assert.IsTrue(res.Success);
+            Assert.IsTrue(isEqual);
         }
         
     }
