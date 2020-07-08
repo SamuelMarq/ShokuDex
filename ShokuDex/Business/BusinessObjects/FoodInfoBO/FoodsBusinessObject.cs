@@ -305,11 +305,11 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                     var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
                     if (idCategory == default)
                     {
-                        res = list.Where(x => regex.IsMatch(x.Name)).ToList();
+                        res = list.Where(x => regex.IsMatch(x.Name) && !x.IsDeleted).ToList();
                     }
                     else
                     {
-                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory).ToList();
+                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted).ToList();
                     }
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
