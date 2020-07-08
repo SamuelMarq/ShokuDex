@@ -261,17 +261,25 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
 
         #region Find
 
-        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory)
+        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory=default)
         {
             try
             {
                 
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
+                    List<Foods> res;
                     var list = _dao.List();
                   
-                    var regex = new Regex("^" + searchFood);
-                    var res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory).ToList(); 
+                    var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
+                    if (idCategory == default)
+                    {
+                        res = list.Where(x => regex.IsMatch(x.Name)).ToList();
+                    }
+                    else
+                    {
+                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory).ToList();
+                    }
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }
@@ -284,17 +292,25 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         }
 
 
-        public OperationResult<List<Foods>> Find(string searchFood, Guid idCategory)
+        public OperationResult<List<Foods>> Find(string searchFood, Guid idCategory = default)
         {
             try
             {
 
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
+                    List<Foods> res;
                     var list = _dao.List();
 
                     var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
-                    var res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted).ToList();
+                    if (idCategory == default)
+                    {
+                        res = list.Where(x => regex.IsMatch(x.Name) && !x.IsDeleted).ToList();
+                    }
+                    else
+                    {
+                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted).ToList();
+                    }
                     scope.Complete();
                     return new OperationResult<List<Foods>>() { Success = true, Result = res };
                 }

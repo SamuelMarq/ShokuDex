@@ -53,7 +53,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
         }
 
         [HttpGet("Find")]
-        public ActionResult<List<FoodViewModel>> Find(string searchFood, Guid id)
+        public ActionResult<List<FoodViewModel>> Find(string searchFood, Guid id=default)
         {
             var res = _bo.Find(searchFood, id);
             if (!res.Success) StatusCode((int)HttpStatusCode.InternalServerError);
