@@ -1,3 +1,5 @@
+use ShokuDex;
+
 insert into Categories(Id, CreatedAt, UpdatedAt, IsDeleted, Name) values
 ('00000000-0000-0000-0000-000000000001', GETDATE(), GETDATE(), 0, 'Alcoholic Beverages'),
 ('00000000-0000-0000-0000-000000000002', GETDATE(), GETDATE(), 0, 'Beverages'),
