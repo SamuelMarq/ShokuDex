@@ -68,5 +68,14 @@ namespace Recodme.ShokuDex.DataAccess.Properties {
                 return ResourceManager.GetString("ConnectionString", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server=sql5063.site4now.net;Database=DB_A6469E_ShokuDex;User Id=DB_A6469E_ShokuDex_admin;Password=192837465a;.
+        /// </summary>
+        public static string OnlineConnectionString {
+            get {
+                return ResourceManager.GetString("OnlineConnectionString", resourceCulture);
+            }
+        }
     }
 }

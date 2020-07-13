@@ -8,7 +8,6 @@ namespace Recodme.ShokuDex.App
         static void Main(string[] args)
         {
             var ctx = new FoodLogContext();
-            ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
         }
     }

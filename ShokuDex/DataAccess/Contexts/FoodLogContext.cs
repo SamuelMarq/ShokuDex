@@ -22,7 +22,7 @@ namespace Recodme.ShokuDex.DataAccess.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Resources.ConnectionString);
+                optionsBuilder.UseSqlServer(Resources.OnlineConnectionString);
             }
         }
 

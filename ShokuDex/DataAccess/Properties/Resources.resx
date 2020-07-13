@@ -120,4 +120,7 @@
   <data name="ConnectionString" xml:space="preserve">
     <value>Server=localhost\SQLEXPRESS;Database=ShokuDex;Trusted_Connection=true;</value>
   </data>
+  <data name="OnlineConnectionString" xml:space="preserve">
+    <value>Server=sql5063.site4now.net;Database=DB_A6469E_ShokuDex;User Id=DB_A6469E_ShokuDex_admin;Password=192837465a;</value>
+  </data>
 </root>
