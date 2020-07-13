@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,18 @@ namespace Recodme.ShokuDex.WebApi
                 {
                     x.SwaggerDoc("v1", new OpenApiInfo() { Title = "ShokuDex", Version = "v1" });
                 });
+
+            //services.AddCors(x => x.AddPolicy("default", (builder) => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //needed if aplication is in a different domain than api
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.Configure<RazorViewEngineOptions>(o =>
+            {
+                o.ViewLocationFormats.Clear();
+                o.ViewLocationFormats.Add("/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+                //o.ViewLocationFormats.Add("/Views/FoodViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

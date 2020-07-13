@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@*inline*@
+<p>
+    @DateTime.Now
+</p>
+
+
+@*multiline*@
+@{ 
+    var name = "Fábio";
+    var message = "Olá";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<p>@message @name</p>
+
+
+@*hibrid*@
+@{ 
+    var otherName = "Miguel";
+    var otherMessage = "Disse o ";
+    <p><span class="font-italic"> "@message @name"</span> <span> - @otherMessage @otherName</span></p>
+}
+
+<p>1+3=@(1+3)</p>

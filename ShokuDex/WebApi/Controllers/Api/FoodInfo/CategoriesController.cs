@@ -9,7 +9,7 @@ using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO;
 using Recodme.ShokuDex.WebApi.ExtraMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 
-namespace Recodme.ShokuDex.WebApi.Controllers.FoodInfo
+namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
 {
     [Route("api/[controller]")]
     [ApiController]

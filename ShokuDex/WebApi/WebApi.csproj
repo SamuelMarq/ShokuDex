@@ -6,13 +6,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Other\" />
-    <Folder Include="Controllers\UserInfo\" />
+    <Compile Remove="Controllers\Other\**" />
+    <Compile Remove="Controllers\UserInfo\**" />
+    <Content Remove="Controllers\Other\**" />
+    <Content Remove="Controllers\UserInfo\**" />
+    <EmbeddedResource Remove="Controllers\Other\**" />
+    <EmbeddedResource Remove="Controllers\UserInfo\**" />
+    <None Remove="Controllers\Other\**" />
+    <None Remove="Controllers\UserInfo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Api\Other\" />
+    <Folder Include="Controllers\Api\UserInfo\" />
+    <Folder Include="Controllers\Web\Other\" />
+    <Folder Include="Controllers\Web\UserInfo\" />
     <Folder Include="Models\Other\" />
     <Folder Include="Models\UserInfo\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
