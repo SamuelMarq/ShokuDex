@@ -85,7 +85,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
                 if (!SupportMethods.Equals(vm, getOperation.Result))
                 {
                     var current = SupportMethods.Update(vm, getOperation.Result);
-                    var updateOperation = _bo.Update(current);
+                    var updateOperation = await _bo.UpdateAsync(current);
                     if (!updateOperation.Success) return View("Error", new ErrorViewModel() { RequestId = updateOperation.Exception.Message });
                 }
             }
