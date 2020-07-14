@@ -37,11 +37,7 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         }
         public async Task<T> ReadAsync(Guid id)
         {
-            return await
-                new Task<T>
-                (
-                    () => _context.Set<T>().FirstOrDefault(x => x.Id == id)
-                );
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
         #endregion
 

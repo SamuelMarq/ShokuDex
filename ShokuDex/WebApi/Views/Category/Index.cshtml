@@ -1,0 +1,33 @@
+﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
+@model IEnumerable<CategoryViewModel>
+
+<h2>Categories</h2>
+
+<p>
+    <a asp-action="Create">Create</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x=>cat.Name)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@cat.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@cat.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@cat.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
