@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO
+namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
 {
     public class CategoriesBusinessObject
     {

@@ -1,0 +1,33 @@
+﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
+@model Dictionary<FoodViewModel, string>
+
+<h2>Category - Details</h2>
+
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-2">
+            <p>Name</p>
+            <p>Description</p>
+            <p>Category</p>
+            <p>Fats</p>
+            <p>Carbohydrates</p>
+            <p>Protein</p>
+            <p>Alcohol</p>
+            <p>Calories</p>
+        </dt>
+        <dd class="col-10">
+            @foreach (var food in Model)
+            {
+                <p>@Html.DisplayFor(x => food.Key.Name)</p>
+                <p>@if (food.Key.Description == "") { <br> } else { Html.DisplayFor(x => food.Key.Description); }</p>
+                <p>@Html.DisplayFor(x => food.Value)</p>
+                <p>@Html.DisplayFor(x => food.Key.Fats)</p>
+                <p>@Html.DisplayFor(x => food.Key.Carbohydrates)</p>
+                <p>@Html.DisplayFor(x => food.Key.Protein)</p>
+                <p>@Html.DisplayFor(x => food.Key.Alcohol)</p>
+                <p>@Html.DisplayFor(x => food.Key.Calories)</p>
+            }
+            </dd>
+    </dl>
+</div>

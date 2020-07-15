@@ -25,7 +25,7 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
 
         public Foods ToFood()
         {
-            return new Foods(Id, DateTime.UtcNow, DateTime.UtcNow, false, Name, Description, Fats, Carbohydrates, Protein, Alcohol, Calories, Portion, Photo, IsRecipe, ProfileId, CategoryId);
+            return new Foods(Name, Description, Fats, Carbohydrates, Protein, Alcohol, Calories, Portion, Photo, IsRecipe, ProfileId, CategoryId);
         }
 
         public static FoodViewModel Parse(Foods obj)

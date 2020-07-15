@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoDAO;
+using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.WebApi.ExtraMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;

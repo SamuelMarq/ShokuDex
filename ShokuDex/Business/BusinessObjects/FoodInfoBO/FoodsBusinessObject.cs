@@ -238,7 +238,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
             }
         }
 
-        public async Task<OperationResult> ListAsync()
+        public async Task<OperationResult<List<Foods>>> ListAsync()
         {
             try
             {

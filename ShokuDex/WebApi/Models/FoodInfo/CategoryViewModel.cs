@@ -10,7 +10,7 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
 
         public Categories ToCategory()
         {
-            return new Categories(Id, DateTime.UtcNow, DateTime.UtcNow, false, Name);
+            return new Categories(Name);
         }
 
         public static CategoryViewModel Parse(Categories obj)

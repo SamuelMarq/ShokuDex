@@ -1,0 +1,44 @@
+﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
+@model Dictionary<FoodViewModel, string>
+
+
+<h2>Food Table</h2>
+
+<p>
+    <a asp-action="Create">Create</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Fats</th>
+                <th>Carbohydrates</th>
+                <th>Protein</th>
+                <th>Calories</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var food in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => food.Key.Name)</td>
+                    <td>@Html.DisplayFor(x => food.Key.Fats)</td>
+                    <td>@Html.DisplayFor(x => food.Key.Carbohydrates)</td>
+                    <td>@Html.DisplayFor(x => food.Key.Protein)</td>
+                    <td>@Html.DisplayFor(x => food.Key.Calories)</td>
+                    <td>@Html.DisplayFor(x => food.Value)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@food.Key.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@food.Key.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@food.Key.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
