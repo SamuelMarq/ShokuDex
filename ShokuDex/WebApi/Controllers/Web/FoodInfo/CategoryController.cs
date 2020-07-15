@@ -11,6 +11,7 @@ using WebApi.Models;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
+    [ApiExplorerSettings(IgnoreApi =true)]
     public class CategoryController : Controller
     {
         private readonly CategoriesBusinessObject _bo = new CategoriesBusinessObject();
@@ -38,7 +39,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
