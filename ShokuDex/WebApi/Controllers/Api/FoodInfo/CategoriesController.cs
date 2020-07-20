@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
-using Recodme.ShokuDex.WebApi.ExtraMethods;
+using Recodme.ShokuDex.WebApi.SupportMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
@@ -61,9 +61,9 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
             var current = currentRes.Result;
             if (current == null) return NotFound();
 
-            if (SupportMethods.Equals(cvm, current)) return StatusCode((int)HttpStatusCode.NotModified);
+            if (SupportMethods.SupportMethods.Equals(cvm, current)) return base.StatusCode((int)HttpStatusCode.NotModified);
 
-            current = SupportMethods.Update(cvm, current);
+            current = SupportMethods.SupportMethods.Update(cvm, current);
 
             var updateResult = _bo.Update(current);
             if (!updateResult.Success) return StatusCode((int)HttpStatusCode.InternalServerError);

@@ -35,6 +35,8 @@ namespace Recodme.ShokuDex.DataAccess.Contexts
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Foods> Foods { get; set; }
         public DbSet<Profiles> Profiles { get; set; }
+        public DbSet<TimesOfDay> TimesOfDay { get; set; }
+        public DbSet<Meals> Meals { get; set; }
     }
 
 }

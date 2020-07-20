@@ -21,12 +21,5 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
                 Name = obj.Name
             };
         }
-
-        public bool Equals(Categories obj)
-        {
-            bool res = (Id == obj.Id);
-            if (res) res = (Name == obj.Name);
-            return res;
-        }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
-using Recodme.ShokuDex.WebApi.ExtraMethods;
+using Recodme.ShokuDex.WebApi.SupportMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;
 
@@ -83,11 +83,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
                 if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
                 if (getOperation.Result == null) return NotFound();
 
-                if (!SupportMethods.Equals(vm, getOperation.Result))
+                if (!SupportMethods.SupportMethods.Equals(vm, getOperation.Result))
                 {
-                    var current = SupportMethods.Update(vm, getOperation.Result);
+                    var current = SupportMethods.SupportMethods.Update(vm, getOperation.Result);
                     var updateOperation = await _bo.UpdateAsync(current);
-                    if (!updateOperation.Success) return View("Error", new ErrorViewModel() { RequestId = updateOperation.Exception.Message });
+                    if (!updateOperation.Success) return base.View("Error", new ErrorViewModel() { RequestId = updateOperation.Exception.Message });
                 }
             }
             return RedirectToAction(nameof(Index));

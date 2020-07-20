@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 
-namespace Recodme.ShokuDex.WebApi.ExtraMethods
+namespace Recodme.ShokuDex.WebApi.SupportMethods
 {
     public class SupportMethods
     {
