@@ -59,7 +59,7 @@ namespace Recodme.ShokuDex.TestLibrary
             Assert.IsFalse(res.Success);
         }
 
-        [TestMethod]
+/*        [TestMethod]
         public void FindFood()
         {
             var res = _bo.Find("a");
@@ -71,6 +71,6 @@ namespace Recodme.ShokuDex.TestLibrary
         {
             var res = _bo.Find("", Guid.Parse("FB56FD90-822B-4BE9-09B6-08D822831157"));
             Assert.IsTrue(res.Success);
-        }
+        }*/
     }
 }

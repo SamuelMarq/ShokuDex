@@ -52,7 +52,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
             return list;
         }
 
-        [HttpGet("Find")]
+/*        [HttpGet("Find")]
         public ActionResult<List<FoodViewModel>> Find(string searchFood, Guid id=default)
         {
             var res = _bo.Find(searchFood, id);
@@ -64,7 +64,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
             }
 
             return list;
-        }
+        }*/
 
         [HttpPut]
         public ActionResult Update([FromBody] FoodViewModel fvm)
