@@ -74,8 +74,15 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction("Index");
         }
 
-        /*public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(Guid? id)
         {
+            if (id == null) return NotFound();
+
+            var getOperation = await _fbo.ReadAsync((Guid)id);
+            if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
+            if (getOperation.Result == null) return NotFound();
+            var fvm = FoodViewModel.Parse(getOperation.Result);
+
             var listOperation = await _cbo.ListAsync();
             if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
             var cats = new List<SelectListItem>();
@@ -84,22 +91,33 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
                 cats.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
             }
             ViewBag.Categories = cats;
-            return View();
+            return View(fvm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(FoodViewModel vm)
+        public async Task<IActionResult> Edit(Guid id, FoodViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                var f = vm.ToFood();
-                var createOperation = await _fbo.CreateAsync(f);
-                if (!createOperation.Success) return View("Error", new ErrorViewModel() { RequestId = createOperation.Exception.Message });
-                return RedirectToAction(nameof(Index));
+                if(id == null) return NotFound();
+
+                var getOperation = await _fbo.ReadAsync((Guid)id);
+                if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
+                if (getOperation.Result == null) return NotFound();
+
+                vm.Calories = vm.Fats * 9 + vm.Carbohydrates * 4 + vm.Protein * 4 + vm.Alcohol * 7;
+
+                if (!SupportMethods.SupportMethods.Equals(vm, getOperation.Result))
+                {
+                    var current = SupportMethods.SupportMethods.Update(vm, getOperation.Result);
+                    var updateOperation = await _fbo.UpdateAsync(current);
+                    if (!updateOperation.Success) return base.View("Error", new ErrorViewModel() { RequestId = updateOperation.Exception.Message });
+                }
             }
-            return RedirectToAction("Index");
-        }*/
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();

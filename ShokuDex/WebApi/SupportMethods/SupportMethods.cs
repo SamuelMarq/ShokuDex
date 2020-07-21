@@ -11,8 +11,13 @@ namespace Recodme.ShokuDex.WebApi.SupportMethods
             {
                 var current = obj.GetType().GetProperty(item.Name).GetValue(obj);
                 var updated = objVM.GetType().GetProperty(item.Name).GetValue(objVM);
-                if (!current.Equals(updated))
-                    return false;
+                if (current == null)
+                {
+                    if (current != updated)
+                            return false;
+                }
+                else if (!current.Equals(updated))
+                        return false;
             }
             return true;
         }
@@ -24,7 +29,15 @@ namespace Recodme.ShokuDex.WebApi.SupportMethods
             {
                 var current = obj.GetType().GetProperty(item.Name).GetValue(obj);
                 var updated = objVM.GetType().GetProperty(item.Name).GetValue(objVM);
-                if (!current.Equals(updated))
+                if (current==null)
+                {
+                    if (current != updated)
+                    {
+                        var property = obj.GetType().GetProperty(item.Name);
+                        property.SetValue(obj, updated);
+                    }
+                }
+                else if (!current.Equals(updated))
                 {
                     var property = obj.GetType().GetProperty(item.Name);
                     property.SetValue(obj,updated);
