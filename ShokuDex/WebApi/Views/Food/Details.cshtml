@@ -10,7 +10,7 @@
         {
             <dt class="col-2">
                 <p>Name</p>
-                @if (food.Key.Description == "") { } else { <p>Description</p> }
+                @if (food.Key.Description == "" || food.Key.Description == null) { } else { <p>Description</p> }
                 <p>Category</p>
                 <p>Fats</p>
                 <p>Carbohydrates</p>
@@ -21,7 +21,7 @@
             <dd class="col-10">
 
                 <p>@Html.DisplayFor(x => food.Key.Name)</p>
-                @if (food.Key.Description == "") { } else { <p>Description</p> }
+                @if (food.Key.Description == "" || food.Key.Description == null) { } else { <p>@food.Key.Description</p> }
                 <p>@Html.DisplayFor(x => food.Value.Name)</p>
                 <p>@Html.DisplayFor(x => food.Key.Fats)</p>
                 <p>@Html.DisplayFor(x => food.Key.Carbohydrates)</p>

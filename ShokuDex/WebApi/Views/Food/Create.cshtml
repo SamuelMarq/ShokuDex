@@ -1,0 +1,74 @@
+﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
+@model FoodViewModel
+
+@{ViewData["Title"] = "Create"; }
+
+<div class="card">
+    <div class="card-header bg-greenish-green">
+        <h2 class="float-left">
+            @ViewData["Title"] - Create
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ml-5 mr-5">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control ml-2" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control ml-2" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <input asp-for="CategoryId" class="form-control ml-2" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Fats" class="control-label"></label>
+                    <input asp-for="Fats" type="number" value="0" class="form-control ml-2" />
+                    <span asp-validation-for="Fats" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Carbohydrates" class="control-label"></label>
+                    <input asp-for="Carbohydrates" type="number" value="0" class="form-control ml-2" />
+                    <span asp-validation-for="Carbohydrates" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Protein" class="control-label"></label>
+                    <input asp-for="Protein" type="number" value="0" class="form-control ml-2" />
+                    <span asp-validation-for="Protein" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Alcohol" class="control-label"></label>
+                    <input asp-for="Alcohol" type="number" value="0" class="form-control ml-2" />
+                    <span asp-validation-for="Alcohol"  class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Portion" class="control-label"></label>
+                    <input asp-for="Portion" type="number" value="0" class="form-control ml-2" />
+                    <span asp-validation-for="Portion" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                    <label asp-for="Photo" class="control-label"></label>
+                    <input asp-for="Photo" type="file" class="form-control ml-2" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <input asp-for="IsGlobal" type="hidden" value="true" />
+                <input asp-for="ProfileId" type="hidden" value="00000000-0000-0000-0000-000000000001" />
+                <input asp-for="Calories" type="hidden" value=0 />
+                <div class="form-group ml-4">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
