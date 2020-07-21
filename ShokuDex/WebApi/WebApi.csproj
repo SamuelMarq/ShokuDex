@@ -23,7 +23,6 @@
     <Folder Include="Controllers\Web\UserInfo\" />
     <Folder Include="Models\Other\" />
     <Folder Include="Models\UserInfo\" />
-    <Folder Include="Views\Meal\" />
     <Folder Include="Views\Other\" />
     <Folder Include="Views\UserInfo\" />
   </ItemGroup>

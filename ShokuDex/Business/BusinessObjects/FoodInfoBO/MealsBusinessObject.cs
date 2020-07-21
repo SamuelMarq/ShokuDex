@@ -3,6 +3,7 @@ using Recodme.ShokuDex.Data.FoodInfo;
 using Recodme.ShokuDex.DataAccess.DataAccessObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -173,7 +174,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         #endregion
 
         #region List
-        public OperationResult<List<Meals>> List()
+        public OperationResult<List<Meals>> FullList()
         {
             try
             {
@@ -190,7 +191,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
             }
         }
 
-        public async Task<OperationResult<List<Meals>>> ListAsync()
+        public async Task<OperationResult<List<Meals>>> FullListAsync()
         {
             try
             {
@@ -206,6 +207,66 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
                 return new OperationResult<List<Meals>>() { Success = false, Exception = e };
             }
         }
+
+
+        public OperationResult<List<Meals>> List()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
+                    scope.Complete();
+                    return new OperationResult<List<Meals>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Meals>>() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult<List<Meals>>> ListAsync()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = await _dao.ListAsync();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
+                    scope.Complete();
+                    return new OperationResult<List<Meals>>() { Success = true, Result = res };
+                }
+
+            }
+
+            catch (Exception e)
+            {
+                return new OperationResult<List<Meals>>() { Success = false, Exception = e };
+            }
+        }
+        #endregion
+
+        #region Filter
+
+        public async Task<OperationResult<List<Meals>>> FilterAsync(Func<Meals, bool> predicate)
+        {
+            try
+            {
+
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, opts, TransactionScopeAsyncFlowOption.Enabled);
+                var result = await _dao.ListAsync();
+                result = result.Where(predicate).ToList();
+                transactionScope.Complete();
+                return new OperationResult<List<Meals>> { Result = result, Success = true };
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Meals>>() { Success = false, Exception = e };
+            }
+        }
+
         #endregion
     }
 }
