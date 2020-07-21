@@ -13,18 +13,31 @@
                     @Html.DisplayNameFor(model => model.Day)
                 </dt>
                 <dd class="col-10">
-                    @Html.DisplayFor(model => model.Portion)
+                    @Html.DisplayFor(model => model.Day)
                 </dd>
-            </dl>
-        </div>
-        <div class="col-sm">
-            <h4>Solver</h4>
-            <dl class="row">
                 <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.Day)
+                    @Html.DisplayNameFor(model => model.Portion)
                 </dt>
                 <dd class="col-10">
                     @Html.DisplayFor(model => model.Portion)
+                </dd>
+                <dt class="col-2">
+                    @Html.DisplayNameFor(model => model.IsSugestion)
+                </dt>
+                <dd class="col-10">
+                    @Html.DisplayFor(model => model.IsSugestion)
+                </dd>
+                <dt class="col-2">
+                    @Html.DisplayNameFor(model => model.FoodId)
+                </dt>
+                <dd class="col-10">
+                    @Html.DisplayFor(model => model.FoodId)
+                </dd>
+                <dt class="col-2">
+                    @Html.DisplayNameFor(model => model.TimeOfDayId)
+                </dt>
+                <dd class="col-10">
+                    @Html.DisplayFor(model => model.TimeOfDayId)
                 </dd>
             </dl>
         </div>
