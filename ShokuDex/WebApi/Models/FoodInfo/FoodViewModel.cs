@@ -18,14 +18,14 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
         public double Calories { get; set; }
         public double Portion { get; set; }
         public string Photo { get; set; }
-        public bool IsRecipe { get; set; }
+        public bool IsGlobal { get; set; }
         public Guid ProfileId { get; set; }
         public Guid CategoryId { get; set; }
 
 
         public Foods ToFood()
         {
-            return new Foods(Name, Description, Fats, Carbohydrates, Protein, Alcohol, Calories, Portion, Photo, IsRecipe, ProfileId, CategoryId);
+            return new Foods(Name, Description, Fats, Carbohydrates, Protein, Alcohol, Calories, Portion, Photo, IsGlobal, ProfileId, CategoryId);
         }
 
         public static FoodViewModel Parse(Foods obj)
@@ -42,7 +42,7 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
                 Calories = obj.Calories,
                 Portion = obj.Portion,
                 Photo = obj.Photo,
-                IsRecipe = obj.IsRecipe,
+                IsGlobal = obj.IsGlobal,
                 ProfileId = obj.ProfileId,
                 CategoryId = obj.CategoryId
             };

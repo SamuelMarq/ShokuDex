@@ -90,15 +90,15 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             }
         }
 
-        private bool _isRecipe;
-        [Display(Name = "Is a recipe")]
-        [Required(ErrorMessage = "Confirm if it is a recipe")]
-        public bool IsRecipe
+        private bool _isGlobal;
+        [Display(Name = "Is Global")]
+        [Required(ErrorMessage = "Confirm if it is Global")]
+        public bool IsGlobal
         {
-            get => _isRecipe;
+            get => _isGlobal;
             set
             {
-                _isRecipe = value;
+                _isGlobal = value;
                 RegisterChange();
             }
         }
@@ -113,7 +113,7 @@ namespace Recodme.ShokuDex.Data.FoodInfo
 
 
         public Foods(string name, string description, double fats, double carbohydrates, double protein, double alcohol, 
-                    double calories, double portion, string photo, bool isRecipe, Guid profileId, Guid categoryId) : base(name, description)
+                    double calories, double portion, string photo, bool isGlobal, Guid profileId, Guid categoryId) : base(name, description)
         {
             _fats = fats;
             _carbohydrates = carbohydrates;
@@ -122,14 +122,14 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             _calories = calories;
             _portion = portion;
             _photo = photo;
-            _isRecipe = isRecipe;
+            _isGlobal = isGlobal;
             ProfileId = profileId;
             CategoryId = categoryId;
         }
 
         public Foods(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted, string name, string description, 
                     double fats, double carbohydrates, double protein, double alcohol, double calories, double portion, 
-                    string photo, bool isRecipe, Guid profileId, Guid categoryId) : base(id, createdAt, updatedAd, isDeleted, name, description)
+                    string photo, bool isGlobal, Guid profileId, Guid categoryId) : base(id, createdAt, updatedAd, isDeleted, name, description)
         {
             _fats = fats;
             _carbohydrates = carbohydrates;
@@ -138,7 +138,7 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             _calories = calories;
             _portion = portion;
             _photo = photo;
-            _isRecipe = isRecipe;
+            _isGlobal = isGlobal;
             ProfileId = profileId;
             CategoryId = categoryId;
         }

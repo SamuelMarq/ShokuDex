@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
@@ -18,6 +19,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         public async Task<IActionResult> Index()
         {
+            //var listOperation = await _fbo.FilterAsync(x => x.isGlobal==... || x.ProfileId == ...);
             var listOperation = await _fbo.ListAsync();
             if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
             var dic = new Dictionary<FoodViewModel,string>();
@@ -36,26 +38,37 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             var getOperation = await _fbo.ReadAsync((Guid)id);
             if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
             if (getOperation.Result == null) return NotFound();
-            var cat = await _cbo.ReadAsync(getOperation.Result.CategoryId);
-            var catName = cat.Result.Name;
-            var vm = FoodViewModel.Parse(getOperation.Result);
-            var dic = new Dictionary<FoodViewModel, string>();
-            dic.Add( vm, catName );
+            var catOperation = await _cbo.ReadAsync(getOperation.Result.CategoryId);
+            var fvm = FoodViewModel.Parse(getOperation.Result);
+            var cvm = CategoryViewModel.Parse(catOperation.Result);
+            var dic = new Dictionary<FoodViewModel, CategoryViewModel>();
+            dic.Add( fvm, cvm);
             return View(dic);
         }
 
         public async Task<IActionResult> Create()
         {
+            var listOperation = await _cbo.ListAsync();
+            if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
+            var cats = new List<CategoryViewModel>();
+            foreach (var item in listOperation.Result)
+            {
+                cats.Add(CategoryViewModel.Parse(item));
+            }
+            ViewBag.Categories = cats;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")]FoodViewModel vm)
+        public async Task<IActionResult> Create(FoodViewModel vm)
         {
             if (ModelState.IsValid)
             {
-
+                var f = vm.ToFood();
+                var createOperation = await _fbo.CreateAsync(f);
+                if (!createOperation.Success) return View("Error", new ErrorViewModel() { RequestId = createOperation.Exception.Message });
+                return RedirectToAction(nameof(Index));
             }
             return RedirectToAction("Index");
         }
