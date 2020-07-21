@@ -31,9 +31,9 @@
                 <td>@Html.DisplayFor(x => meal.FoodId)</td>
                 <td>@Html.DisplayFor(x => meal.TimeOfDayId)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@meal.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@meal.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@meal.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@meal.Id"><i class="fas fa-edit text-secondary">Edit</i></a>
+                    <a asp-action="Details" asp-route-id="@meal.Id"><i class="fas fa-search text-primary">Details</i></a>
+                    <a asp-action="Delete" asp-route-id="@meal.Id"><i class="fas fa-trash text-danger">Delete</i></a>
                 </td>
             </tr>
             }

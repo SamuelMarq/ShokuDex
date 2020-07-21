@@ -88,7 +88,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")] MealViewModel vm)
+        public async Task<IActionResult> Create([Bind("Day", "Portion", "IsSugestion", "ProfileId", "FoodsId", "TimesOfDayId")] MealViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id, Name")] MealViewModel vm)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id", "Day", "Portion", "IsSugestion", "ProfileId", "FoodsId", "TimesOfDayId")] MealViewModel vm)
         {
             if (ModelState.IsValid)
             {

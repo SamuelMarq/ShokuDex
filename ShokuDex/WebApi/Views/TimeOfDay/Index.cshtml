@@ -21,9 +21,9 @@
                 <tr>
                     <td>@Html.DisplayFor(x => tod.Name)</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@tod.Id">Edit</a>
-                        <a asp-action="Details" asp-route-id="@tod.Id">Details</a>
-                        <a asp-action="Delete" asp-route-id="@tod.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@tod.Id"><i class="fas fa-edit text-secondary">Edit</i></a>
+                        <a asp-action="Details" asp-route-id="@tod.Id"><i class="fas fa-search text-primary">Details</i></a>
+                        <a asp-action="Delete" asp-route-id="@tod.Id"><i class="fas fa-trash text-danger">Delete</i></a>
                     </td>
                 </tr>
             }
