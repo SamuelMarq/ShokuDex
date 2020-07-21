@@ -69,3 +69,41 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+.wrapper 
+{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 56px;
+
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #97CC00;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active
+{
+    margin-left: -230px;
+}
+
+.sidebarCollapse
+{
+    background: #97CC00;
+}
+
+.container-fluid {
+    position: sticky;
+    margin-left: 250px;
+}
+
+ 
