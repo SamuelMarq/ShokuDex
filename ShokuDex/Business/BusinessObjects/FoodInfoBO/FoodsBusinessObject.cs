@@ -259,62 +259,18 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         }
         #endregion
 
-        #region Find
+        #region Filter
 
-        public OperationResult<List<Foods>> FullFind(string searchFood, Guid idCategory=default)
-        {
-            try
-            {
-                
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    List<Foods> res;
-                    var list = _dao.List();
-                  
-                    var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
-                    if (idCategory == default)
-                    {
-                        res = list.Where(x => regex.IsMatch(x.Name)).ToList();
-                    }
-                    else
-                    {
-                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory).ToList();
-                    }
-                    scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
-                }
-
-            }
-            catch (Exception e)
-            {
-                return new OperationResult<List<Foods>>() { Success = false, Exception = e };
-            }
-        }
-
-
-        public OperationResult<List<Foods>> Find(string searchFood, Guid idCategory = default)
+        public async Task<OperationResult<List<Foods>>> FilterAsync(Func<Foods, bool> predicate)
         {
             try
             {
 
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    List<Foods> res;
-                    var list = _dao.List();
-
-                    var regex = new Regex("^" + searchFood, RegexOptions.IgnoreCase);
-                    if (idCategory == default)
-                    {
-                        res = list.Where(x => regex.IsMatch(x.Name) && !x.IsDeleted).ToList();
-                    }
-                    else
-                    {
-                        res = list.Where(x => regex.IsMatch(x.Name) && x.CategoryId == idCategory && !x.IsDeleted).ToList();
-                    }
-                    scope.Complete();
-                    return new OperationResult<List<Foods>>() { Success = true, Result = res };
-                }
-
+                using var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled);
+                var result = await _dao.ListAsync();
+                result = result.Where(predicate).ToList();
+                transactionScope.Complete();
+                return new OperationResult<List<Foods>> { Result = result, Success = true };
             }
             catch (Exception e)
             {
