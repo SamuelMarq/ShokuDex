@@ -18,6 +18,7 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
         [Display(Name = "Food")]
         [Required(ErrorMessage = "Select the food")]
         public Guid FoodId { get; set; }
+
         [Display(Name = "Time Of Day")]
         [Required(ErrorMessage = "Select the time of day")]
         public Guid TimeOfDayId { get; set; }
