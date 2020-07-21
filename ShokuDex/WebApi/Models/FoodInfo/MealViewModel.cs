@@ -12,6 +12,7 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
         public Guid Id { get; set; }
         public DateTime Day { get; set; }
         public string Portion { get; set; }
+        [Display(Name = "Is a sugestion")]
         public bool IsSugestion { get; set; }
         public Guid ProfileId { get; set; }
         [Display(Name = "Food")]
