@@ -23,6 +23,7 @@
     <Folder Include="Controllers\Web\UserInfo\" />
     <Folder Include="Models\Other\" />
     <Folder Include="Models\UserInfo\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
