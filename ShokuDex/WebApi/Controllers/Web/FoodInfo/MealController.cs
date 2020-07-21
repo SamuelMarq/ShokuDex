@@ -111,6 +111,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             if (ModelState.IsValid)
             {
                 vm.ProfileId = new Guid("00000000-0000-0000-0000-000000000001");
+                vm.IsSugestion = false;
                 var m = vm.ToMeal();
                 var createOperation = await _bo.CreateAsync(m);
                 if (!createOperation.Success) return View("Error", new ErrorViewModel() { RequestId = createOperation.Exception.Message });
@@ -159,6 +160,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
                 if (id == null) return NotFound();
 
                 vm.ProfileId = new Guid("00000000-0000-0000-0000-000000000001");
+                vm.IsSugestion = false;
 
                 var getOperation = await _bo.ReadAsync((Guid)id);
                 if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
