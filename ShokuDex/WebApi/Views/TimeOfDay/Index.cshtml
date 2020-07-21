@@ -1,0 +1,33 @@
+﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
+@model IEnumerable<TimeOfDayViewModel>
+
+<h2>Time of Day</h2>
+
+<p>
+    <a asp-action="Create">Create</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tod in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => tod.Name)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@tod.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@tod.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@tod.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
