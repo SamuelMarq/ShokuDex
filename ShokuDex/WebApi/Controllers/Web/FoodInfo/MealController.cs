@@ -64,8 +64,8 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             {
                 lst.Add(MealViewModel.Parse(item));
             }
-            ViewData["Title"] = "Menus";
-            ViewData["BreadCrumbs"] = new List<string>() { "Home", "Menus" };
+            ViewData["Title"] = "Meal";
+            ViewData["BreadCrumbs"] = new List<string>() { "Home", "Meal" };
             ViewData["Food"] = await GetFoodViewModels(fIds);
             ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
             return View(lst);
