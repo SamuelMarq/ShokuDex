@@ -58,11 +58,11 @@
                     <li class="sidebarElement">
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Food</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li">
+                            <li class="subMenu">
                                 <a asp-action="Index" asp-controller="Food" id="foodTable"> Food Table</a>
                             </li>
 
-                            <li>
+                            <li class="subMenu">
                                 <a asp-action="Insert" asp-controller="Food" id="insertFood"> Insert Food</a>
                             </li>
                         </ul>
@@ -107,7 +107,7 @@
     </div>
 
     <footer class=" footer text-muted">
-        <div class="container">
+        <div class="container" id="copyright">
             &copy; 2020 - &reg;ShokuDex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>

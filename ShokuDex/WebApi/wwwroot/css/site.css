@@ -70,9 +70,12 @@ body {
     max-width: 1250px;
 }
 
-footer
+#copyright
 {
-    position:absolute;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left:90vh;
     bottom: 0px;
 }
 
@@ -82,44 +85,44 @@ footer
     border: 5px;
     border-style: solid;
     border-color: #fff;
-    border-radius:2%;
+    border-radius: 2%;
     color: #fff;
     text-decoration: none;
+    border-right: 0px;
+    border-left: 0px;
 }
 
-.dropdown-toggle {
+.dropdown-toggle, #foodDiary {
     white-space: nowrap;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 105px;
+    padding-right: 114px;
     padding-left: 68px;
     margin-left: -40px;
+  
+   
 }
 
-#foodDiary {
-    white-space: nowrap;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 105px;
-    padding-left: 68px;
-    margin-left: -40px;
-}
 
 #foodTable, #insertFood
 {
     font-family: Calibri;
-    font-size: 25px;
-    border-bottom: 5px;
+    font-size: 20px;
+    border:0px;
     border-style: solid;
     border-color: #fff;
     color: #fff;
     text-decoration: none;
     white-space: nowrap;
-    padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 105px;
     padding-left: 68px;
     margin-left: -40px;
+}
+
+.subMenu
+{
+    padding-top:40px;
 }
 .topBar 
 {
