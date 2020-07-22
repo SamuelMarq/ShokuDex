@@ -33,9 +33,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -61,11 +59,11 @@
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Food</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                                <a href="#" id="foodTable"> Food Table</a>
+                                <a asp-action="Index" asp-controller="Food" id="foodTable"> Food Table</a>
                             </li>
 
                             <li>
-                                <a href="#" id="insertFood"> Insert Food</a>
+                                <a asp-action="Insert" asp-controller="Food" id="insertFood"> Insert Food</a>
                             </li>
                         </ul>
                     </li>
@@ -81,11 +79,11 @@
                 </ul>
             </nav>
 
-            <div id="content">
+            <div id="content" class="bg-transparent">
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                            <div class="container-fluid bg-transparent">
+                        <nav class="navbar ">
+                            <div class="container-fluid">
 
                                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                                     <i class="navbar-icon fa fa-bars icon"></i>
