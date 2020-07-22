@@ -9,7 +9,7 @@
 </p>
 
 <div class="table-responsive">
-    <table class="table">
+    <table class="table table-hove" id="listTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -42,3 +42,15 @@
     </table>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#listTable').DataTable({
+            "order": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+        });
+    });
+</script>
