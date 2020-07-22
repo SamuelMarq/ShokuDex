@@ -1,12 +1,12 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
-@model CategoryViewModel
+@model TimeOfDayViewModel
 
-@{ViewData["Title"] = "Create"; }
+@{ViewData["Title"] = "New"; }
 
-<h2>Category - Create</h2>
+<h2>Time of Day - New</h2>
 
 <div class="row">
-    <form asp-action="Create">
+    <form asp-action="New">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Name" class="control-label"></label>

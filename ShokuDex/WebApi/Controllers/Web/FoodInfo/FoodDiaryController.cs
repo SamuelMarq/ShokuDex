@@ -113,7 +113,8 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
-        public async Task<IActionResult> Create()
+        [HttpGet("new")]
+        public async Task<IActionResult> New()
         {
             var flistOperation = await _fbo.ListAsync();
             if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
@@ -135,9 +136,9 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("new")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MealViewModel vm)
+        public async Task<IActionResult> New(MealViewModel vm)
         {
             if (ModelState.IsValid)
             {
