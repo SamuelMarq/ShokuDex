@@ -65,8 +65,25 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             {
                 lst.Add(MealViewModel.Parse(item));
             }
-            ViewData["Title"] = "Meal";
-            ViewData["BreadCrumbs"] = new List<string>() { "Home", "Meal" };
+
+            var flistOperation = await _fbo.ListAsync();
+            if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
+            var foods = new List<SelectListItem>();
+            foreach (var item in flistOperation.Result)
+            {
+                foods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.Foods = foods;
+
+            var todlistOperation = await _todbo.ListAsync();
+            if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
+            var tods = new List<SelectListItem>();
+            foreach (var item in todlistOperation.Result)
+            {
+                tods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.TimesOfDay = tods;
+
             ViewData["Food"] = await GetFoodViewModels(fIds);
             ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
             return View(lst);
@@ -79,6 +96,17 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
             if (getOperation.Result == null) return NotFound();
             var vm = MealViewModel.Parse(getOperation.Result);
+
+            var getFOperation = await _fbo.ReadAsync(getOperation.Result.FoodId);
+            if (!getFOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getFOperation.Exception.Message });
+            if (getFOperation.Result == null) return NotFound();
+
+            var getTodOperation = await _todbo.ReadAsync(getOperation.Result.TimeOfDayId);
+            if (!getTodOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getTodOperation.Exception.Message });
+            if (getTodOperation.Result == null) return NotFound();
+
+            ViewData["Food"] = FoodViewModel.Parse(getFOperation.Result);
+            ViewData["TimeOfDay"] = TimeOfDayViewModel.Parse(getTodOperation.Result);
             return View(vm);
         }
 

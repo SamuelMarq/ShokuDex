@@ -1,13 +1,12 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
 @model MealViewModel
 
-<h2>Meals - Details</h2>
+<h2>Meal - Details</h2>
 
 <hr />
 <div>
     <div class="row">
         <div class="col-sm">
-            <h4>Requester</h4>
             <dl class="row">
                 <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Day)
@@ -21,23 +20,21 @@
                 <dd class="col-10">
                     @Html.DisplayFor(model => model.Portion)
                 </dd>
-                @*<dt class="col-2">
-                    @Html.DisplayNameFor(model => model.IsSugestion)
-                </dt>
-                <dd class="col-10">
-                    @Html.DisplayFor(model => model.IsSugestion)
-                </dd>*@
+                @{
+                    var f = ViewData["Food"] as FoodViewModel;
+                    var tod = ViewData["TimeOfDay"] as TimeOfDayViewModel;
+                }
                 <dt class="col-2">
                     @Html.DisplayNameFor(model => model.FoodId)
                 </dt>
                 <dd class="col-10">
-                    @Html.DisplayFor(model => model.FoodId)
+                    @f.Name
                 </dd>
                 <dt class="col-2">
                     @Html.DisplayNameFor(model => model.TimeOfDayId)
                 </dt>
                 <dd class="col-10">
-                    @Html.DisplayFor(model => model.TimeOfDayId)
+                    @tod.Name
                 </dd>
             </dl>
         </div>
