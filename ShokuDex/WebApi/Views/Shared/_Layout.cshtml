@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <script src="~/js/site.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
 
 </head>
 <body>
-    <header>
+    <header class="topBar">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ShokuDex</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/ShokuDex Logo.png"  id="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -49,59 +51,50 @@
               
 
                 <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
+                    
                     <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">Home 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 3</a>
-                            </li>
-                        </ul>
+                    <li class="sidebarElement">
+                        <a href="#">News</a>
                     </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <li class="sidebarElement">
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Food</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                                <a href="#"> Page 1</a>
+                                <a href="#"> Food Table</a>
                             </li>
 
                             <li>
-                                <a href="#"> Page 2</a>
-                            </li>
-
-                            <li>
-                                <a href="#"> Page 3</a>
+                                <a href="#"> Insert Food</a>
                             </li>
                         </ul>
                     </li>
-
+                    <li class="sidebarElement">
+                        <a href="#">Food Diary</a>
+                    </li>
+                    <li class="sidebarElement">
+                        <a href="#">Measurements Diary</a>
+                    </li>
+                    <li class="sidebarElement">
+                        <a href="#">Reports</a>
+                    </li="sidebarElement">
                 </ul>
             </nav>
 
             <div id="content">
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                            <div class="container-fluid">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="navbar-icon fa fa-bars icon"></i>
+                                </button>
 
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="navbar-icon fa fa-bars icon"></i>
-                        </button>
-
-                    </div>
-
-
-                </nav>
-
-            </div>
+                            </div>
+                        </nav>
+                    </li>
+                </ul>
+</div>
         </div>
     </header>
 
@@ -113,7 +106,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - WebApi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - &reg;ShokuDex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
    

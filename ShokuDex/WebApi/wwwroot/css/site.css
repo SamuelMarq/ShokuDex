@@ -2,15 +2,14 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+ 
 }
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
+
 
 .btn-primary {
   color: #fff;
@@ -70,10 +69,15 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+header .topBar 
+{
+    background-color: #6A9100;
+    position:fixed;
+
+}
 
 .wrapper 
 {
-    display: flex;
     width: 100%;
     align-items: stretch;
 }
@@ -85,15 +89,29 @@ body {
 
     left: 0;
     height: 100vh;
-    z-index: 999;
+    z-index: 998;
     background: #97CC00;
     color: #fff;
     transition: all 0.3s;
 }
 
-#sidebar.active
+#sidebar.active 
 {
-    margin-left: -230px;
+    margin-left: -198px;
+
+}
+
+.sidebarElement
+{
+    padding-top:68px;
+    padding-bottom:65px;
+    margin-left:37px;
+}
+
+#content.active 
+{
+    margin-left: -179px;
+    background: #97CC00;
 }
 
 .sidebarCollapse
@@ -102,8 +120,21 @@ body {
 }
 
 .container-fluid {
-    position: sticky;
-    margin-left: 250px;
+    
+    margin-left: 153px;
+    margin-top: -16px;
+    z-index: 999;
 }
 
- 
+ #logo
+{
+    width:30px;
+    height:30px;
+}
+
+
+
+.btn-info, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info, .btn-info:active:focus {
+    background-color: #97CC00;
+    border-color: #97CC00;
+}
