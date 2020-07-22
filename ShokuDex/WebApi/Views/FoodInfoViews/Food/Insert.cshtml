@@ -62,7 +62,8 @@
                 <input asp-for="ProfileId" type="hidden" value="00000000-0000-0000-0000-000000000001" />
                 <input asp-for="Calories" type="hidden" value=0 />
                 <div class="form-group ml-4">
-                    <input type="submit" value="insert" class="btn btn-primary" />
+                    <input type="submit" value="Insert" class="btn btn-primary" />
+                    <a asp-action="Index" asp-controller="Food"class="btn btn-danger">Back</a>
                 </div>
             </form>
         </div>

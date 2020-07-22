@@ -48,6 +48,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             if (getOperation.Result == null) return NotFound();
             var catOperation = await _cbo.ReadAsync(getOperation.Result.CategoryId);
             var fvm = FoodViewModel.Parse(getOperation.Result);
+            fvm.Fats = Math.Round(fvm.Fats, 2);
+            fvm.Carbohydrates = Math.Round(fvm.Carbohydrates, 2);
+            fvm.Protein = Math.Round(fvm.Protein, 2);
+            fvm.Alcohol = Math.Round(fvm.Alcohol, 2);
+            fvm.Calories = Math.Round(fvm.Calories, 2);
             var cvm = CategoryViewModel.Parse(catOperation.Result);
             var dic = new Dictionary<FoodViewModel, CategoryViewModel>();
             dic.Add( fvm, cvm);
