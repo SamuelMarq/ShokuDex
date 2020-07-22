@@ -11,13 +11,14 @@ using WebApi.Models;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
-    [Route("[controller]")]
+    [Route("[Controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class FoodController : Controller
     {
         private readonly FoodsBusinessObject _fbo = new FoodsBusinessObject();
         private readonly CategoriesBusinessObject _cbo = new CategoriesBusinessObject();
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             //var listOperation = await _fbo.FilterAsync(x => x.isGlobal==... || x.ProfileId == ...);
@@ -38,6 +39,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(dic);
         }
 
+        [HttpGet("details")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();
@@ -80,6 +82,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction("Index");
         }
 
+        [HttpGet("edit/{id}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
@@ -100,7 +103,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(fvm);
         }
 
-        [HttpPost]
+        [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, FoodViewModel vm)
         {
@@ -124,6 +127,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();

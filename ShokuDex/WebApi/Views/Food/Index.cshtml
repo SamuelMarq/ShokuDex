@@ -25,12 +25,12 @@
             @foreach (var food in Model)
             {
                 <tr>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id"> @Html.DisplayFor(x => food.Key.Name)</a></td>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Calories) kcal</a></td>
-                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Value)</a></td>
+                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Name)</a></td>
+                    <td><a asp-action="Details"asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
+                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
+                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
+                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Calories) kcal</a></td>
+                    <td><a asp-action="Details"  asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Value)</a></td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@food.Key.Id"><i class="fas fa-edit text-secondary"></i></a>
                         <a onclick="ConfirmDelete('@food.Key.Id')"><i class="fas fa-trash text-danger"></i></a>
@@ -63,7 +63,7 @@
 <script>
 
     var ConfirmDelete = function (id) {
-        $("#deleteBtn").attr("href", "@ViewData["DeleteHref"]" + "Food_Table/delete/" + id);
+        $("#deleteBtn").attr("href", "@ViewData["DeleteHref"]" + "Food/delete/" + id);
         $("#modal").modal('show');
     }
 
@@ -77,5 +77,8 @@
         });
     });
 
-
 </script>
+
+<style>
+    
+</style>

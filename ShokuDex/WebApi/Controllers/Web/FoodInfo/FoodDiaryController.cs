@@ -11,6 +11,7 @@ using WebApi.Models;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
+    [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class FoodDiaryController : Controller
     {
@@ -54,6 +55,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return TimeOfDayViewModel.Parse(getOperation.Result);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var listOperation = await _bo.ListAsync();
@@ -89,6 +91,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(lst);
         }
 
+        [HttpGet("{id}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();
@@ -149,6 +152,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
+        [HttpGet("edit/{id}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
@@ -179,7 +183,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
-        [HttpPost]
+        [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, MealViewModel vm)
         {
@@ -204,6 +208,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
