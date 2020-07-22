@@ -86,6 +86,16 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             }
             ViewBag.TimesOfDay = tods;
 
+            DateTime today = DateTime.Today;
+            int currentDayOfWeek = (int)today.DayOfWeek;
+            DateTime sunday = today.AddDays(-currentDayOfWeek);
+            DateTime monday = sunday.AddDays(-6);
+            if (currentDayOfWeek == 0)
+            {
+                monday = monday.AddDays(-7);
+            }
+            ViewData["WeekDay"] = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
+
             ViewData["Food"] = await GetFoodViewModels(fIds);
             ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
             return View(lst);
