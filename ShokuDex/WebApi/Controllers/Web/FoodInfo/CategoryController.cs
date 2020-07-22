@@ -42,14 +42,15 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
-        public IActionResult Create()
+        [HttpGet("new")]
+        public IActionResult New()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("new")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")] CategoryViewModel vm)
+        public async Task<IActionResult> New([Bind("Name")] CategoryViewModel vm)
         {
             if (ModelState.IsValid)
             {

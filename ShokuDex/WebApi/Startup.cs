@@ -38,7 +38,9 @@ namespace Recodme.ShokuDex.WebApi
                 o.ViewLocationFormats.Clear();
                 o.ViewLocationFormats.Add("/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-                //o.ViewLocationFormats.Add("/Views/FoodViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add("/Views/FoodInfoViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add("/Views/UserInfoViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add("/Views/OtherViews/{1}/{0}" + RazorViewEngine.ViewExtension);
             });
         }
 

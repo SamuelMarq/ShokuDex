@@ -23,8 +23,8 @@
     <Folder Include="Controllers\Web\UserInfo\" />
     <Folder Include="Models\Other\" />
     <Folder Include="Models\UserInfo\" />
-    <Folder Include="Views\Other\" />
-    <Folder Include="Views\UserInfo\" />
+    <Folder Include="Views\OtherViews\" />
+    <Folder Include="Views\UserInfoViews\" />
   </ItemGroup>
 
   <ItemGroup>
