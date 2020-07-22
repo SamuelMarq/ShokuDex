@@ -5,7 +5,7 @@
 <h2>Food Table</h2>
 
 <p>
-    <a asp-action="Insert"><i class="fas fa-plus mr-1"></i>Insert Food</a>
+    <a class="insert" asp-action="Insert">&nbsp;&nbsp;<i class="fas fa-plus mr-1"></i>Insert Food&nbsp;&nbsp;</a>
 </p>
 
 <div class="table-responsive">
@@ -17,7 +17,7 @@
                 <th>Carbohydrates</th>
                 <th>Protein</th>
                 <th>Calories</th>
-                <th>Category</th>
+                <th class="text-center">Category</th>
                 <th class="no-sort"></th>
             </tr>
         </thead>
@@ -25,12 +25,12 @@
             @foreach (var food in Model)
             {
                 <tr>
-                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Name)</a></td>
-                    <td><a asp-action="Details"asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
-                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
-                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
-                    <td><a asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Calories) kcal</a></td>
-                    <td><a asp-action="Details"  asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Value)</a></td>
+                    <td><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Name)</a></td>
+                    <td  class="text-right"><a class="foodT" asp-action="Details"asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
+                    <td class="text-right"><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
+                    <td class="text-right"><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
+                    <td class="text-right"><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Calories) kcal</a></td>
+                    <td class="text-center"><a class="foodT" asp-action="Details"  asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Value)</a></td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@food.Key.Id"><i class="fas fa-edit text-secondary"></i></a>
                         <a onclick="ConfirmDelete('@food.Key.Id')"><i class="fas fa-trash text-danger"></i></a>
@@ -80,5 +80,25 @@
 </script>
 
 <style>
-    
+    a.foodT, a.foodT:link, a.foodT:visited, a.foodT:hover {
+        font-family: Calibri;
+        font-size: 20px;
+        color: #000000;
+        text-decoration: none;
+    }
+
+    a.insert, a.insert:link, a.insert:visited, a.insert:hover {
+        font-family: Calibri;
+        font-size: 25px;
+        font-weight:bold;
+        margin:10px;
+        color: #fff;
+        background-color: #97CC00;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+@*    td {
+        text-align: center;
+    }*@
 </style>
