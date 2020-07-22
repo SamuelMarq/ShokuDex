@@ -85,7 +85,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Api.FoodInfo
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public ActionResult Remove(Guid id)
         {
             var result = _bo.Delete(id);
             if (result.Success) return Ok();
