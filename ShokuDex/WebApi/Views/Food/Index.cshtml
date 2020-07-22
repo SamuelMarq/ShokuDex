@@ -5,7 +5,7 @@
 <h2>Food Table</h2>
 
 <p>
-    <a asp-action="Insert_food"><i class="fas fa-plus mr-1"></i>Insert Food</a>
+    <a asp-action="Insert"><i class="fas fa-plus mr-1"></i>Insert Food</a>
 </p>
 
 <div class="table-responsive">
@@ -25,12 +25,12 @@
             @foreach (var food in Model)
             {
                 <tr>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Name)</td>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Fats) g</td>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Carbohydrates) g</td>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Protein) g</td>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Calories) kcal</td>
-                    <td onclick="location.href = 'Details/@food.Key.Id';">@Html.DisplayFor(x => food.Value)</td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id"> @Html.DisplayFor(x => food.Key.Name)</a></td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Calories) kcal</a></td>
+                    <td><a asp-action="Details" asp-controller="Food" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Value)</a></td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@food.Key.Id"><i class="fas fa-edit text-secondary"></i></a>
                         <a onclick="ConfirmDelete('@food.Key.Id')"><i class="fas fa-trash text-danger"></i></a>

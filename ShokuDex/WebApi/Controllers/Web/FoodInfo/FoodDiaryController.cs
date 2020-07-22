@@ -12,7 +12,7 @@ using WebApi.Models;
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class Food_DiaryController : Controller
+    public class FoodDiaryController : Controller
     {
         private readonly MealsBusinessObject _bo = new MealsBusinessObject();
         private readonly ProfilesBusinessObject _pbo = new ProfilesBusinessObject();

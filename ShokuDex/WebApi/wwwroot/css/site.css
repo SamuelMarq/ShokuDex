@@ -62,6 +62,7 @@ html
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  
 }
 .footer 
 {
@@ -99,8 +100,6 @@ body {
     background: #97CC00;
     color: #fff;
     transition: all 0.3s;
-    font-family:Calibri;
-    
 }
 
 #sidebar.active 
@@ -109,11 +108,13 @@ body {
 
 }
 
-.sidebarElement
-{
-    padding-top:68px;
-    padding-bottom:65px;
-    margin-left:37px;
+.sidebarElement {
+    padding-top: 68px;
+    padding-bottom: 65px;
+    margin-left: 37px;
+    font-family:Calibri;
+    text-decoration:none;
+    text-decoration-color:#fff;
 }
 
 #content.active 
