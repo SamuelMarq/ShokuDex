@@ -20,9 +20,9 @@
 
 </head>
 <body>
-    <header class="topBar">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+    <header class="topBar fixed-top" >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow ">
+            <div class="container" id="upper">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/ShokuDex Logo.png"  id="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -54,29 +54,29 @@
                     
                     <li class="active">
                     <li class="sidebarElement">
-                        <a href="#">News</a>
+                        <!--<a href="#">News</a>-->
                     </li>
                     <li class="sidebarElement">
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Food</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                                <a href="#"> Food Table</a>
+                                <a href="#" id="foodTable"> Food Table</a>
                             </li>
 
                             <li>
-                                <a href="#"> Insert Food</a>
+                                <a href="#" id="insertFood"> Insert Food</a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebarElement">
-                        <a href="#">Food Diary</a>
+                        <a href="#" id="foodDiary">Food Diary</a>
                     </li>
                     <li class="sidebarElement">
-                        <a href="#">Measurements Diary</a>
+                        <!--<a href="#">Measurements Diary</a>-->
                     </li>
                     <li class="sidebarElement">
-                        <a href="#">Reports</a>
-                    </li="sidebarElement">
+                        <!--<a href="#">Reports</a>-->
+                    </li>
                 </ul>
             </nav>
 
@@ -94,7 +94,7 @@
                         </nav>
                     </li>
                 </ul>
-</div>
+            </div>
         </div>
     </header>
 
@@ -104,7 +104,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class=" footer text-muted">
         <div class="container">
             &copy; 2020 - &reg;ShokuDex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
