@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
@@ -64,8 +65,8 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             {
                 lst.Add(MealViewModel.Parse(item));
             }
-            ViewData["Title"] = "Menus";
-            ViewData["BreadCrumbs"] = new List<string>() { "Home", "Menus" };
+            ViewData["Title"] = "Meal";
+            ViewData["BreadCrumbs"] = new List<string>() { "Home", "Meal" };
             ViewData["Food"] = await GetFoodViewModels(fIds);
             ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
             return View(lst);
@@ -81,17 +82,36 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(vm);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var flistOperation = await _fbo.ListAsync();
+            if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
+            var foods = new List<SelectListItem>();
+            foreach (var item in flistOperation.Result)
+            {
+                foods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.Foods = foods;
+
+            var todlistOperation = await _todbo.ListAsync();
+            if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
+            var tods = new List<SelectListItem>();
+            foreach (var item in todlistOperation.Result)
+            {
+                tods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.TimesOfDay = tods;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Day", "Portion", "IsSugestion", "ProfileId", "FoodsId", "TimesOfDayId")] MealViewModel vm)
+        public async Task<IActionResult> Create(MealViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                vm.ProfileId = new Guid("00000000-0000-0000-0000-000000000001");
+                vm.IsSugestion = false;
                 var m = vm.ToMeal();
                 var createOperation = await _bo.CreateAsync(m);
                 if (!createOperation.Success) return View("Error", new ErrorViewModel() { RequestId = createOperation.Exception.Message });
@@ -110,16 +130,37 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             if (getOperation.Result == null) return NotFound();
             var vm = MealViewModel.Parse(getOperation.Result);
 
+            var flistOperation = await _fbo.ListAsync();
+            if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
+            var foods = new List<SelectListItem>();
+            foreach (var item in flistOperation.Result)
+            {
+                foods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.Foods = foods;
+
+            var todlistOperation = await _todbo.ListAsync();
+            if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
+            var tods = new List<SelectListItem>();
+            foreach (var item in todlistOperation.Result)
+            {
+                tods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+            ViewBag.TimesOfDay = tods;
+
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id", "Day", "Portion", "IsSugestion", "ProfileId", "FoodsId", "TimesOfDayId")] MealViewModel vm)
+        public async Task<IActionResult> Edit(Guid id, MealViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 if (id == null) return NotFound();
+
+                vm.ProfileId = new Guid("00000000-0000-0000-0000-000000000001");
+                vm.IsSugestion = false;
 
                 var getOperation = await _bo.ReadAsync((Guid)id);
                 if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });

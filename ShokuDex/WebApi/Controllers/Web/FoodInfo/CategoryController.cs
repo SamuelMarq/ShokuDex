@@ -73,7 +73,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id, Name")] CategoryViewModel vm)
+        public async Task<IActionResult> Edit(Guid id, CategoryViewModel vm)
         {
             if (ModelState.IsValid)
             {

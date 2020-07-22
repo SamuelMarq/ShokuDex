@@ -6,7 +6,7 @@
 <h2>Category - Edit</h2>
 
 <div class="row">
-    <form asp-action="Create">
+    <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Day" class="control-label"></label>
@@ -18,10 +18,20 @@
             <input asp-for="Portion" class="form-control" />
             <span asp-validation-for="Portion" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="IsSugestion" class="control-label"></label>
             <input asp-for="IsSugestion" class="form-control" />
             <span asp-validation-for="IsSugestion" class="text-danger"></span>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="FoodId" class="control-label"></label>
+            <select asp-items="@ViewBag.Foods" asp-for="FoodId" class="form-control sel2-select"><option></option></select>
+            <span asp-validation-for="FoodId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TimeOfDayId" class="control-label"></label>
+            <select asp-items="@ViewBag.TimesOfDay" asp-for="TimeOfDayId" class="form-control sel2-select"><option></option></select>
+            <span asp-validation-for="TimeOfDayId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Update" class="btn btn-primary" />
@@ -32,3 +42,12 @@
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    $(document).ready(function () {
+        $('.sel2-select').select2({
+            placeholder: "Select a value",
+            allowClear: true
+        });
+    });
+</script>

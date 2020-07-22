@@ -103,6 +103,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO
         {
             try
             {
+                food.Calories = food.Fats * 9 + food.Carbohydrates * 4 + food.Protein * 4 + food.Alcohol * 7;
                 _dao.Update(food);
                 return new OperationResult() { Success = true };
             }

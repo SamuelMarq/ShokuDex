@@ -19,14 +19,20 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         #region Create
         public void Create(T item)
         {
-            _context.Set<T>().Add(item);
-            _context.SaveChanges();
+            using (var _ctx = new FoodLogContext())
+            {
+                _ctx.Set<T>().Add(item);
+                _ctx.SaveChanges();
+            }
         }
 
         public async Task CreateAsync(T item)
         {
-            await _context.Set<T>().AddAsync(item);
-            await _context.SaveChangesAsync();
+            using (var _ctx = new FoodLogContext())
+            {
+                await _context.Set<T>().AddAsync(item);
+                await _context.SaveChangesAsync();
+            }
         }
         #endregion
 
@@ -44,13 +50,19 @@ namespace Recodme.ShokuDex.DataAccess.DataAccessObjects
         #region Update
         public void Update(T item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
+            using (var _ctx = new FoodLogContext())
+            {
+                _ctx.Entry(item).State = EntityState.Modified;
+                _ctx.SaveChanges();
+            }            
         }
         public async Task UpdateAsync(T item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            using (var _ctx = new FoodLogContext())
+            {
+                _ctx.Entry(item).State = EntityState.Modified;
+                await _ctx.SaveChangesAsync();
+            }
         }
         #endregion
 
