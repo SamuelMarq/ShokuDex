@@ -89,7 +89,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             {
                 foods.Add(FoodViewModel.Parse(item));
             }
-            ViewData["Foods"] = foods.ToList();
+            ViewBag.Foods = foods;
 
             var todlistOperation = await _todbo.ListAsync();
             if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });

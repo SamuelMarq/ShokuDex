@@ -33,11 +33,13 @@
                     <tr>
                         @{
                             var foodido = Model.First(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
-                            var baglist = ViewBag.Foods;
-                            Func<FoodViewModel, bool> condition = (food => food.Id == foodido.Id);
-                            <th colspan="2">@foodido</th>
-                            @*<th colspan="2">@ViewData["Foods"].Where(condition)</th>*@
+                            var baglist = (List<FoodViewModel>)ViewBag.Foods;
+                            Func<FoodViewModel, bool> condition = (food => food.Id == foodido.FoodId);
+                            <th colspan="2">@foodido.Id</th>    
                         }
+                    </tr>
+                    <tr>
+                        <th colspan="2">@baglist.First(condition).Name</th>
                     </tr>
                 </table>
             </td>
