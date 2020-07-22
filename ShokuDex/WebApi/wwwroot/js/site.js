@@ -50,7 +50,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#foodDiary').on('click', function () {
-        location.href = 'Food_Diary'
+        location.href = '/Food_Diary'
     });
 });
 
