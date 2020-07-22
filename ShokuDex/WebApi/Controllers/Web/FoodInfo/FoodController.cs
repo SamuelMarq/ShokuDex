@@ -12,11 +12,10 @@ using WebApi.Models;
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class FoodController : Controller
+    public class Food_TableController : Controller
     {
         private readonly FoodsBusinessObject _fbo = new FoodsBusinessObject();
         private readonly CategoriesBusinessObject _cbo = new CategoriesBusinessObject();
-        
 
         public async Task<IActionResult> Index()
         {
@@ -52,7 +51,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return View(dic);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Insert_food()
         {
             var listOperation = await _cbo.ListAsync();
             if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
@@ -67,7 +66,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(FoodViewModel vm)
+        public async Task<IActionResult> Insert_food(FoodViewModel vm)
         {
             if (ModelState.IsValid)
             {

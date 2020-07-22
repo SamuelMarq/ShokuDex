@@ -34,3 +34,23 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#myTable').DataTable();
 });
+
+
+$(document).ready(function () {
+    $('#foodTable').on('click', function () {
+        location.href = 'Food_Table'
+    });
+});
+
+$(document).ready(function () {
+    $('#insertFood').on('click', function () {
+        location.href = 'Food_Table/Insert_food'
+    });
+});
+
+$(document).ready(function () {
+    $('#foodDiary').on('click', function () {
+        location.href = 'Food_Diary'
+    });
+});
+
