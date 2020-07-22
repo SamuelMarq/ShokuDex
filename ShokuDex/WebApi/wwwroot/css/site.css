@@ -117,6 +117,10 @@ body {
     text-decoration-color:#fff;
 }
 
+#content
+{
+    color:none;
+}
 #content.active 
 {
     margin-left: -184px;
@@ -131,8 +135,9 @@ body {
 .container-fluid {
     
     margin-left: 153px;
-    margin-top: -16px;
+    margin-top: -137px;
     z-index: 999;
+    
 }
 
  #logo
