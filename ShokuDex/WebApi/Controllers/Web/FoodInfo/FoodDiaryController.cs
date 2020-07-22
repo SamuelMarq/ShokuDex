@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO;
+using Recodme.ShokuDex.Data.FoodInfo;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;
 
@@ -58,46 +59,48 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var listOperation = await _bo.ListAsync();
-            if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
-            var fIds = listOperation.Result.Select(x => x.FoodId).Distinct().ToList();
-            var todIds = listOperation.Result.Select(x => x.TimeOfDayId).Distinct().ToList();
+            //var fIds = listOperation.Result.Select(x => x.FoodId).Distinct().ToList();
+            //var todIds = listOperation.Result.Select(x => x.TimeOfDayId).Distinct().ToList();
+
+            DateTime today = DateTime.Today;
+            int currentDayOfWeek = (int)today.DayOfWeek;
+            DateTime sunday = today.AddDays(-currentDayOfWeek);
+            DateTime monday = sunday.AddDays(1);
+            if (currentDayOfWeek == 0)
+            {
+                monday = monday.AddDays(-7);
+            }
+            var weekDays = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
+            ViewBag.WeekDay = weekDays;
+
+            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && weekDays[0] >= x.Day && x.Day <= weekDays[6]);
+            if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
+
             var lst = new List<MealViewModel>();
-            foreach (var item in listOperation.Result)
+            foreach (var item in dlistOperation.Result)
             {
                 lst.Add(MealViewModel.Parse(item));
             }
 
             var flistOperation = await _fbo.ListAsync();
             if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
-            var foods = new List<SelectListItem>();
+            var foods = new List<FoodViewModel>();
             foreach (var item in flistOperation.Result)
             {
-                foods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+                foods.Add(FoodViewModel.Parse(item));
             }
-            ViewBag.Foods = foods;
+            ViewData["Foods"] = foods.ToList();
 
             var todlistOperation = await _todbo.ListAsync();
             if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
-            var tods = new List<SelectListItem>();
+            var tods = new List<TimeOfDayViewModel>();
             foreach (var item in todlistOperation.Result)
             {
-                tods.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+                tods.Add(TimeOfDayViewModel.Parse(item));
             }
-            ViewBag.TimesOfDay = tods;
+            ViewBag.TimesOfDay = tods.ToList();
 
-            DateTime today = DateTime.Today;
-            int currentDayOfWeek = (int)today.DayOfWeek;
-            DateTime sunday = today.AddDays(-currentDayOfWeek);
-            DateTime monday = sunday.AddDays(-6);
-            if (currentDayOfWeek == 0)
-            {
-                monday = monday.AddDays(-7);
-            }
-            ViewData["WeekDay"] = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
-
-            ViewData["Food"] = await GetFoodViewModels(fIds);
-            ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
+            //ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
             return View(lst);
         }
 
