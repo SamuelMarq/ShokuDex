@@ -14,11 +14,8 @@
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Day)</th>
                 <th>@Html.DisplayNameFor(model => model.Portion)</th>
-                <th>@*@Html.DisplayNameFor(model => model.IsSugestion)*@</th>
-                @*<th>@Html.DisplayNameFor(model => model.ProfileId)</th>*@
                 <th>@Html.DisplayNameFor(model => model.FoodId)</th>
                 <th>@Html.DisplayNameFor(model => model.TimeOfDayId)</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +24,12 @@
             <tr>
                 <td>@Html.DisplayFor(x => meal.Day)</td>
                 <td>@Html.DisplayFor(x => meal.Portion)</td>
-                @*<td>@Html.DisplayFor(x => meal.IsSugestion)</td>*@
-                @*<td>@Html.DisplayFor(x => meal.ProfileId)</td>*@
-                <td>@Html.DisplayFor(x => meal.FoodId)</td>
-                <td>@Html.DisplayFor(x => meal.TimeOfDayId)</td>
+                @{
+                    var f = (ViewData["Food"] as List<FoodViewModel>).First(x => x.Id == meal.FoodId);
+                    var tod = (ViewData["TimeOfDay"] as List<TimeOfDayViewModel>).First(x => x.Id == meal.TimeOfDayId);
+                }
+                <td>@f.Name</td>
+                <td>@tod.Name</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@meal.Id"><i class="fas fa-edit text-secondary">Edit</i></a>
                     <a asp-action="Details" asp-route-id="@meal.Id"><i class="fas fa-search text-primary">Details</i></a>
