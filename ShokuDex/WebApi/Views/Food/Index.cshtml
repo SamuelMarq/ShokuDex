@@ -9,7 +9,7 @@
 </p>
 
 <div class="table-responsive">
-    <table class="table">
+    <table class="table table-hove" id="listTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -18,23 +18,22 @@
                 <th>Protein</th>
                 <th>Calories</th>
                 <th>Category</th>
-                <th></th>
+                <th class="no-sort"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var food in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(x => food.Key.Name)</td>
-                    <td>@Html.DisplayFor(x => food.Key.Fats)</td>
-                    <td>@Html.DisplayFor(x => food.Key.Carbohydrates)</td>
-                    <td>@Html.DisplayFor(x => food.Key.Protein)</td>
-                    <td>@Html.DisplayFor(x => food.Key.Calories)</td>
-                    <td>@Html.DisplayFor(x => food.Value)</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Name)</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Fats) g</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Carbohydrates) g</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Protein) g</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Key.Calories) kcal</td>
+                    <td onclick="location.href = 'Food/Details/@food.Key.Id';">@Html.DisplayFor(x => food.Value)</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@food.Key.Id">Edit</a>
-                        <a asp-action="Details" asp-route-id="@food.Key.Id">Details</a>
-                        <a asp-action="Delete" asp-route-id="@food.Key.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@food.Key.Id"><i class="fas fa-edit text-secondary"></i></a>
+                        <a onclick="ConfirmDelete('@food.Key.Id')"><i class="fas fa-trash text-danger"></i></a>
                     </td>
                 </tr>
             }
@@ -42,3 +41,41 @@
     </table>
 
 </div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                <a id="deleteBtn" class="btn btn-primary" asp-action="Delete" asp-route-id="">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var ConfirmDelete = function (id) {
+        $("#deleteBtn").attr("href", "@ViewData["DeleteHref"]" + "food/delete/" + id);
+        $("#modal").modal('show');
+    }
+
+    $(document).ready(function () {
+        $('#listTable').DataTable({
+            "order": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+        });
+    });
+
+
+</script>

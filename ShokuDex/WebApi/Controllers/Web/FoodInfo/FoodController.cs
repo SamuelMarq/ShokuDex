@@ -26,6 +26,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             var dic = new Dictionary<FoodViewModel,string>();
             foreach (var item in listOperation.Result)
             {
+                item.Fats = Math.Round(item.Fats, 2);
+                item.Carbohydrates = Math.Round(item.Carbohydrates, 2);
+                item.Protein = Math.Round(item.Protein, 2);
+                item.Alcohol = Math.Round(item.Alcohol, 2);
+                item.Calories = Math.Round(item.Calories, 2);
                 var cat = await _cbo.ReadAsync(item.CategoryId);
                 var catName = cat.Result.Name;
                 dic.Add(FoodViewModel.Parse(item), catName);
