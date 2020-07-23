@@ -210,19 +210,20 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DetailFilter(Guid timeofday, string date, Meals meal)
+        private bool DetailFilter(Guid timeofday, DateTime dateResult, Meals meal)
         {
             var guidToTest = new Guid("00000000-0000-0000-0000-000000000001");
             //var guid = Guid.Parse(timeofday);
-            var dateResult = DateTime.Parse(date);
+            //var dateResult = DateTime.Parse(date);
             return guidToTest == meal.ProfileId && meal.Day.Year == dateResult.Year && meal.Day.DayOfYear == dateResult.DayOfYear && timeofday == meal.TimeOfDayId;
         }
 
         [HttpGet("Details")]
         public async Task<IActionResult> Details(Guid timeofday, string date)
         {
+            var dateResult = DateTime.Parse(date);
 
-            var dlistOperation = await _bo.FilterAsync(x => DetailFilter(timeofday, date, x));
+            var dlistOperation = await _bo.FilterAsync(x => DetailFilter(timeofday, dateResult, x));
             if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
 
 
@@ -247,7 +248,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             if (!todReadOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todReadOperation.Exception.Message });
 
             ViewBag.TimeOfDay = todReadOperation.Result;
-            ViewBag.Day = date;
+            ViewBag.Day = dateResult;
 
 
             return View(lst);
