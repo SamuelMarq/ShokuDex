@@ -10,11 +10,17 @@ namespace Recodme.ShokuDex.WebApi.Models.FoodInfo
     public class MealViewModel
     {
         public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "Select the day")]
         public DateTime Day { get; set; }
-        public string Portion { get; set; }
+
+        [Required(ErrorMessage = "Add the eaten portion")]
+        public double Portion { get; set; }
+
         [Display(Name = "Is a sugestion")]
         public bool IsSugestion { get; set; }
         public Guid ProfileId { get; set; }
+
         [Display(Name = "Food")]
         [Required(ErrorMessage = "Select the food")]
         public Guid FoodId { get; set; }

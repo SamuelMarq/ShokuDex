@@ -13,6 +13,7 @@ namespace Recodme.ShokuDex.App
             var ctx = new FoodLogContext();
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
+            Console.WriteLine("Done!");
 /*            FoodsBusinessObject _fbo = new FoodsBusinessObject();
 
             var regex = new Regex("^" + "", RegexOptions.IgnoreCase);

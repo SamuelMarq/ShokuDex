@@ -19,9 +19,9 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             }
         }
 
-        private string _portion;
+        private double _portion;
         [Required(ErrorMessage = "Insert portion")]
-        public string Portion
+        public double Portion
         {
             get => _portion;
             set
@@ -57,7 +57,7 @@ namespace Recodme.ShokuDex.Data.FoodInfo
         public virtual TimesOfDay TimesOfDay { get; set; }
 
 
-        public Meals(DateTime day, string portion, bool isSugestion, Guid profileId, Guid foodId, Guid timeOfDayId) : base()
+        public Meals(DateTime day, double portion, bool isSugestion, Guid profileId, Guid foodId, Guid timeOfDayId) : base()
         {
             _day = day;
             _portion = portion;
@@ -67,7 +67,7 @@ namespace Recodme.ShokuDex.Data.FoodInfo
             TimeOfDayId = timeOfDayId;
         }
 
-        public Meals(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted, DateTime day, string portion, bool isSugestion, Guid profileId, Guid foodId, Guid timeOfDayId) : base(id, createdAt, updatedAd, isDeleted)
+        public Meals(Guid id, DateTime createdAt, DateTime updatedAd, bool isDeleted, DateTime day, double portion, bool isSugestion, Guid profileId, Guid foodId, Guid timeOfDayId) : base(id, createdAt, updatedAd, isDeleted)
         {
             _day = day;
             _portion = portion;
