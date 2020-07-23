@@ -48,7 +48,7 @@
          @{ 
              var foods = foodList.Where(f => foodIds.Select(y=>y.Id).Contains(f.Id));
          }
-            <td></td>
+            <td>Total</td>
             <td>
                 @{
                     var sumFats = 0.0;
@@ -80,13 +80,13 @@
                 @sumPro g
             </td>
             <td> @{
-                    var sumAls = 0.0;
+                    var sumAlc = 0.0;
                     foreach (var prod in foods)
                     {
-                        sumAls += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Alcohol / 100;
+                        sumAlc += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Alcohol / 100;
                     }
                 }
-                @sumAls g</td>
+                @sumAlc g</td>
             <td>
                 @{
                     var sumCal = 0.0;
