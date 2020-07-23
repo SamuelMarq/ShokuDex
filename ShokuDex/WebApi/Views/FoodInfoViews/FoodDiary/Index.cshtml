@@ -1,6 +1,8 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
 @model List<MealViewModel>
-@*@ViewData["Foods"] List<FoodViewModel>*@
+@{ 
+    var baglist = (List<FoodViewModel>)ViewBag.Foods;
+}
 
 
 <h2>Meal</h2>
@@ -21,23 +23,25 @@
             <th scope="col">@ViewBag.WeekDay[5].ToString("dd/MM")</th>
             <th scope="col">@ViewBag.WeekDay[6].ToString("dd/MM")</th>
         </tr>
-    <tr>
+        <tr>
             <th scope="row">Morning</th>
             <td>
-                <ul>
+                <ul class="pl-0">
                     @{
-                        var baglist = (List<FoodViewModel>)ViewBag.Foods;
                         var foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                         Func<FoodViewModel, bool> condition0 = (food => foodid0.Select(x => x.FoodId).Contains(food.Id));
                     }
                     @foreach (var item in baglist.Where(condition0))
                     {
-                        if (item == baglist.Where(condition0).ToList()[2])
+                        if (baglist.Where(condition0).Count() > 2)
                         {
-                            <li>
-                                ...
-                            </li>
-                            break;
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
                         }
                         <li>
                             @item.Name
@@ -45,60 +49,804 @@
                     }
                 </ul>
             </td>
-        <td>
-            <p>1</p>
-            <p>2</p>
-            <p>...</p>
-        </td>
-        @*<td>@f.name.where(meal.day == @ViewBag.WeekDay[0].ToString("dd/MM") && meal.timeofdayid == morning)</td>
-        <td>
-            <a asp-action="edit" asp-route-id="@meal.id"><i class="fas fa-edit text-secondary"></i></a>
-            <a asp-action="delete" asp-route-id="@meal.id"><i class="fas fa-trash text-danger"></i></a>
-        </td>*@
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
         <tr>
             <th scope="row">Lunch</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
         </tr>
         <tr>
             <th scope="row">Afternoon</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
         </tr>
         <tr>
             <th scope="row">Dinner</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[3].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
         </tr>
         <tr>
             <th scope="row">Night</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul class="pl-0">
+                    @{
+                        foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[4].Id);
+                    }
+                    @foreach (var item in baglist.Where(condition0))
+                    {
+                        if (baglist.Where(condition0).Count() > 2)
+                        {
+                            if (item == baglist.Where(condition0).ToList()[2])
+                            {
+                                <li>
+                                    ...
+                                </li>
+                                break;
+                            }
+                        }
+                        <li>
+                            @item.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+        @*<td>
+            <a asp-action="edit" asp-route-id="@meal.id"><i class="fas fa-edit text-secondary"></i></a>
+            <a asp-action="delete" asp-route-id="@meal.id"><i class="fas fa-trash text-danger"></i></a>
+        </td>*@
         </tr>
 
         <tr>
@@ -106,36 +854,89 @@
             <td>
                 @{ 
                     var day0cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[0]);
-                    var prods = baglist.Where(x => day0cal.Select(y => y.FoodId).Contains(x.Id));
-                    var sum = 0.0;
-                    foreach (var prod in prods)
+                    var prods0 = baglist.Where(x => day0cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum0 = 0.0;
+                    foreach (var prod in prods0)
                     {
-                        sum += day0cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                        sum0 += day0cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
                     }
                 }
-                @sum
+                @sum0 kcal
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                @{
+                    var day1cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[1]);
+                    var prods1 = baglist.Where(x => day1cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum1 = 0.0;
+                    foreach (var prod in prods1)
+                    {
+                        sum1 += day1cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum1 kcal
+            </td>
+            <td>
+                @{
+                    var day2cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[2]);
+                    var prods2 = baglist.Where(x => day2cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum2 = 0.0;
+                    foreach (var prod in prods2)
+                    {
+                        sum2 += day2cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum2 kcal
+            </td>
+            <td>
+                @{
+                    var day3cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[3]);
+                    var prods3 = baglist.Where(x => day3cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum3 = 0.0;
+                    foreach (var prod in prods3)
+                    {
+                        sum3 += day3cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum3 kcal
+            </td>
+            <td>
+                @{
+                    var day4cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[4]);
+                    var prods4 = baglist.Where(x => day4cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum4 = 0.0;
+                    foreach (var prod in prods4)
+                    {
+                        sum4 += day4cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum4 kcal
+            </td>
+            <td>
+                @{
+                    var day5cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[5]);
+                    var prods5 = baglist.Where(x => day5cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum5 = 0.0;
+                    foreach (var prod in prods5)
+                    {
+                        sum5 += day5cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum5 kcal
+            </td>
+            <td>
+                @{
+                    var day6cal = Model.Where(meal => meal.Day == ViewBag.WeekDay[6]);
+                    var prods6 = baglist.Where(x => day6cal.Select(y => y.FoodId).Contains(x.Id));
+                    var sum6 = 0.0;
+                    foreach (var prod in prods6)
+                    {
+                        sum6 += day6cal.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sum6 kcal
+            </td>
         </tr>
-        @*}*@
     </table>
 
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#listTable').DataTable({
-            "order": [],
-            "columnDefs": [{
-                "targets": 'no-sort',
-                "orderable": false,
-            }]
-        });
-    });
-</script>
 
