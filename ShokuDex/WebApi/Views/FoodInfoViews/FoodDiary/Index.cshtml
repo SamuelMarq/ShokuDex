@@ -1,5 +1,6 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
-@model IEnumerable<MealViewModel>
+@model List<MealViewModel>
+@ViewData["Foods"] List<FoodViewModel>
 
 
 <h2>Meal</h2>
@@ -12,44 +13,51 @@
     <table class="table" id="listTable">
         <tr>
             <td></td>
-            <th scope="col">Sunday</th>
-            <th scope="col">Monday</th>
-            <th scope="col">Tuesday</th>
-            <th scope="col">Wednesday</th>
-            <th scope="col">Thursday</th>
-            <th scope="col">Friday</th>
-            <th scope="col">Saturday</th>
+            <th scope="col">@ViewBag.WeekDay[0].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[1].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[2].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[3].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[4].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[5].ToString("dd/MM")</th>
+            <th scope="col">@ViewBag.WeekDay[6].ToString("dd/MM")</th>
         </tr>
         @*@foreach (var meal in Model)
-        {
-            var f = (ViewData["Food"] as List<FoodViewModel>).First(x => x.Id == meal.FoodId);
-            var tod = (ViewData["TimeOfDay"] as List<TimeOfDayViewModel>).First(x => x.Id == meal.TimeOfDayId);
-            var wd = (ViewData["WeekDay"]);*@
-            <tr>
-                <th scope="row">Morning</th>
-                <td>
-                    <table>
-                        <tr>
-                            <th colspan="2"></th>
-                            <th colspan="2"></th>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>...</p>
-                </td>
-                @*<td>@f.name.where(meal.day == sunday && meal.timeofdayid == morning)</td>
+            {
+                var f = (ViewData["Food"] as List<FoodViewModel>).First(x => x.Id == meal.FoodId);
+                var tod = (ViewData["TimeOfDay"] as List<TimeOfDayViewModel>).First(x => x.Id == meal.TimeOfDayId);
+                var wd = (ViewData["WeekDay"]);*@
+        <tr>
+            <th scope="row">Morning</th>
+            <td>
+                <table>
+                    <tr>
+                        @{
+                            var foodido = Model.First(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
+                            var baglist = (List<FoodViewModel>)ViewBag.Foods;
+                            Func<FoodViewModel, bool> condition = (food => food.Id == foodido.FoodId);
+                            <th colspan="2">@foodido.Id</th>    
+                        }
+                    </tr>
+                    <tr>
+                        <th colspan="2">@baglist.First(condition).Name</th>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <p>1</p>
+                <p>2</p>
+                <p>...</p>
+            </td>
+            @*<td>@f.name.where(meal.day == @ViewBag.WeekDay[0].ToString("dd/MM") && meal.timeofdayid == morning)</td>
                 <td>
                     <a asp-action="edit" asp-route-id="@meal.id"><i class="fas fa-edit text-secondary"></i></a>
                     <a asp-action="delete" asp-route-id="@meal.id"><i class="fas fa-trash text-danger"></i></a>
                 </td>*@
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
         <tr>
             <th scope="row">Lunch</th>
             <td></td>
@@ -90,6 +98,7 @@
             <td></td>
             <td></td>
         </tr>
+
         <tr>
             <th scope="row">Calories</th>
             <td></td>
@@ -105,36 +114,36 @@
 
     <br />
 
-    <table class="table" id="listTable">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Day)</th>
-                <th>@Html.DisplayNameFor(model => model.Portion)</th>
-                <th>@Html.DisplayNameFor(model => model.FoodId)</th>
-                <th>@Html.DisplayNameFor(model => model.TimeOfDayId)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var meal in Model)
-            {
-            <tr>
-                <td>@Html.DisplayFor(x => meal.Day)</td>
-                <td>@Html.DisplayFor(x => meal.Portion) g</td>
-                @{
-                    var f = (ViewData["Food"] as List<FoodViewModel>).First(x => x.Id == meal.FoodId);
-                    var tod = (ViewData["TimeOfDay"] as List<TimeOfDayViewModel>).First(x => x.Id == meal.TimeOfDayId);
+    @*<table class="table" id="listTable">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Day)</th>
+                    <th>@Html.DisplayNameFor(model => model.Portion)</th>
+                    <th>@Html.DisplayNameFor(model => model.FoodId)</th>
+                    <th>@Html.DisplayNameFor(model => model.TimeOfDayId)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var meal in Model)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(x => meal.Day)</td>
+                    <td>@Html.DisplayFor(x => meal.Portion) g</td>
+                    @{
+                        var f = (ViewData["Food"] as List<FoodViewModel>).First(x => x.Id == meal.FoodId);
+                        var tod = (ViewData["TimeOfDay"] as List<TimeOfDayViewModel>).First(x => x.Id == meal.TimeOfDayId);
+                    }
+                    <td>@f.Name</td>
+                    <td>@tod.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@meal.Id"><i class="fas fa-edit text-secondary">Edit</i></a>
+                        <a asp-action="Details" asp-route-id="@meal.Id"><i class="fas fa-search text-primary">Details</i></a>
+                        <a asp-action="Delete" asp-route-id="@meal.Id"><i class="fas fa-trash text-danger">Delete</i></a>
+                    </td>
+                </tr>
                 }
-                <td>@f.Name</td>
-                <td>@tod.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@meal.Id"><i class="fas fa-edit text-secondary">Edit</i></a>
-                    <a asp-action="Details" asp-route-id="@meal.Id"><i class="fas fa-search text-primary">Details</i></a>
-                    <a asp-action="Delete" asp-route-id="@meal.Id"><i class="fas fa-trash text-danger">Delete</i></a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>*@
 
 </div>
 
