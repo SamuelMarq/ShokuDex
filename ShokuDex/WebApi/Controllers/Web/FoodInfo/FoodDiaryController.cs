@@ -73,7 +73,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             var weekDays = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
             ViewBag.WeekDay = weekDays;
 
-            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && weekDays[0] >= x.Day && x.Day <= weekDays[6]);
+            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day >= weekDays[0] && x.Day <= weekDays[6]);
             if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
 
             var lst = new List<MealViewModel>();
@@ -210,15 +210,15 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Details/{timeofday}/{date}")]
 
+        [HttpGet("Details/{timeofday}/{date}")]
         public async Task<IActionResult> Details(Guid tId, DateTime day)
         {
 
-            
-
             var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day == day && x.TimeOfDayId == tId);
             if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
+
+
 
             var lst = new List<MealViewModel>();
             foreach (var item in dlistOperation.Result)
@@ -228,6 +228,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
             var flistOperation = await _fbo.ListAsync();
             if (!flistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = flistOperation.Exception.Message });
+
             var foods = new List<FoodViewModel>();
             foreach (var item in flistOperation.Result)
             {
@@ -237,12 +238,13 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
             var todlistOperation = await _todbo.ListAsync();
             if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
+
             var tods = new List<TimeOfDayViewModel>();
             foreach (var item in todlistOperation.Result)
             {
                 tods.Add(TimeOfDayViewModel.Parse(item));
             }
-            ViewBag.TimesOfDay = tods.ToList();
+            ViewBag.TimesOfDay = tods;
 
 
             return View(lst);
