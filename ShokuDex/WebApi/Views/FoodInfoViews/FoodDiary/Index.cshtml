@@ -44,7 +44,7 @@
                             }
                         }
                         <li>
-                            @item.Name
+                            <a asp-controller="FoodDiary" asp-action="Details" asp-route-id="@ViewBag.TimesOfDay[0].Id/@ViewBag.WeekDay[0].ToString()">@item.Name</a>
                         </li>
                     }
                 </ul>
