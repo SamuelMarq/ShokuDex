@@ -92,33 +92,48 @@ body {
     border-left: 0px;
 }
 
-.dropdown-toggle, #foodDiary {
+.dropdown-toggle, #foodDiary , #admin
+{
     white-space: nowrap;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 114px;
     padding-left: 68px;
     margin-left: -40px;
   
    
 }
 
-
-#foodTable, #insertFood
+#admin
 {
-    font-family: Calibri;
-    font-size: 20px;
-    border:0px;
-    border-style: solid;
-    border-color: #fff;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-    padding-bottom: 10px;
-    padding-right: 105px;
-    padding-left: 68px;
-    margin-left: -40px;
+    padding-right:46px;
 }
+
+.dropdown-toggle 
+{
+    padding-right: 114px;
+}
+
+    #foodDiary
+    {
+        padding-right:76px;
+    }
+
+    #foodTable, #insertFood {
+        font-family: Calibri;
+        font-size: 20px;
+        border: 0px;
+        border-style: solid;
+        border-color: #fff;
+        color: #fff;
+        text-decoration: none;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        padding-right: 105px;
+        padding-left: 68px;
+        margin-left: -40px;
+    }
+
+
 
 .subMenu
 {

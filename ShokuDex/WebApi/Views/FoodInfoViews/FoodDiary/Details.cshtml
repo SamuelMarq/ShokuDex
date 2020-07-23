@@ -1,43 +1,106 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
-@model MealViewModel
+@model List<MealViewModel>
 
-<h2>Meal - Details</h2>
+@{
+    var foodList = (List<FoodViewModel>)ViewBag.Foods;
+}
+
+<h2> @ViewBag.Day - @ViewBag.TimeOfDay.Name</h2>
 
 <hr />
-<div>
-    <div class="row">
-        <div class="col-sm">
-            <dl class="row">
-                <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.Day)
-                </dt>
-                <dd class="col-10">
-                    @Html.DisplayFor(model => model.Day)
-                </dd>
-                <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.Portion)
-                </dt>
-                <dd class="col-10">
-                    @Html.DisplayFor(model => model.Portion)
-                </dd>
+
+<table class="table-responsive">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Fats</th>
+            <th>Carbohydrates</th>
+            <th>Protein</th>
+            <th>Alcohol</th>
+            <th>Calories</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            var foodIds = Model.Where(meal => meal.Day == DateTime.Parse(ViewBag.Day) && meal.TimeOfDayId == ViewBag.TimeOfDay.Id).ToList();
+        }
+        @foreach (var item in Model)
+        {
+            
+                var food = foodList.FirstOrDefault(food => foodIds.Select(x => x.FoodId).Contains(item.FoodId));
+            
+            <tr>
+
+                <td>@food.Name</td>
+                <td>@food.Fats</td>
+                <td>@food.Carbohydrates</td>
+                <td>@food.Protein</td>
+                <td>@food.Alcohol</td>
+                <td>@food.Calories</td>
+                <td></td>
+            </tr>
+
+        }
+
+     <tr>
+         @{ 
+             var foods = foodList.Where(f => foodIds.Select(y=>y.Id).Contains(f.Id));
+         }
+            <td></td>
+            <td>
                 @{
-                    var f = ViewData["Food"] as FoodViewModel;
-                    var tod = ViewData["TimeOfDay"] as TimeOfDayViewModel;
+                    var sumFats = 0.0;
+                    foreach (var prod in foods)
+                    {
+                        sumFats += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Fats / 100;
+                    }
                 }
-                <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.FoodId)
-                </dt>
-                <dd class="col-10">
-                    @f.Name
-                </dd>
-                <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.TimeOfDayId)
-                </dt>
-                <dd class="col-10">
-                    @tod.Name
-                </dd>
-            </dl>
-            <a asp-action="Index" asp-controller="FoodDiary" class="btn btn-danger">Back</a>
-        </div>
-    </div>
-</div>
+                @sumFats g
+            </td>
+            <td>
+                @{
+                    var sumCar = 0.0;
+                    foreach (var prod in foods)
+                    {
+                        sumCar += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Carbohydrates / 100;
+                    }
+                }
+                @sumCar g
+            </td>
+            <td>
+                @{
+                    var sumPro = 0.0;
+                    foreach (var prod in foods)
+                    {
+                        sumPro += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Protein / 100;
+                    }
+                }
+                @sumPro g
+            </td>
+            <td> @{
+                    var sumAls = 0.0;
+                    foreach (var prod in foods)
+                    {
+                        sumAls += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Alcohol / 100;
+                    }
+                }
+                @sumAls g</td>
+            <td>
+                @{
+                    var sumCal = 0.0;
+                    foreach (var prod in foods)
+                    {
+                        sumCal += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                    }
+                }
+                @sumCal kcal
+            </td>
+            <td></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<a asp-action="Index" asp-controller="FoodDiary" class="btn btn-danger">Back</a>

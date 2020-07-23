@@ -212,10 +212,10 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
 
         [HttpGet("Details/{timeofday}/{date}")]
-        public async Task<IActionResult> Details(Guid tId, DateTime day)
+        public async Task<IActionResult> Details(Guid tId, string day)
         {
 
-            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day == day && x.TimeOfDayId == tId);
+            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day == DateTime.Parse(day) && x.TimeOfDayId == tId);
             if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
 
 
@@ -236,15 +236,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             }
             ViewBag.Foods = foods;
 
-            var todlistOperation = await _todbo.ListAsync();
-            if (!todlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todlistOperation.Exception.Message });
+            var todReadOperation = await _todbo.ReadAsync(tId);
+            if (!todReadOperation.Success) return View("Error", new ErrorViewModel() { RequestId = todReadOperation.Exception.Message });
 
-            var tods = new List<TimeOfDayViewModel>();
-            foreach (var item in todlistOperation.Result)
-            {
-                tods.Add(TimeOfDayViewModel.Parse(item));
-            }
-            ViewBag.TimesOfDay = tods;
+            ViewBag.TimeOfDay = todReadOperation.Result;
+            ViewBag.Day = day;
 
 
             return View(lst);
