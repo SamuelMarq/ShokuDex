@@ -6,11 +6,18 @@ using Recodme.ShokuDex.DataAccess.Properties;
 
 namespace Recodme.ShokuDex.DataAccess.Contexts
 {
-    public class FoodLogContext : IdentityDbContext<User, Role, int>
+    public class FoodLogContext : IdentityDbContext<User, ShokuDexRole, int>
     {
+        private string _connectionString = string.Empty;
+
         public FoodLogContext() : base()
         {
 
+        }
+
+        public FoodLogContext(string cString)
+        {
+            _connectionString = cString;
         }
 
         public FoodLogContext(DbContextOptions<FoodLogContext> options) : base(options)
@@ -22,7 +29,14 @@ namespace Recodme.ShokuDex.DataAccess.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Resources.ConnectionString);
+                if (_connectionString == string.Empty)
+                {
+                    optionsBuilder.UseSqlServer(Resources.ConnectionString);
+                }
+                else
+                {
+                    optionsBuilder.UseSqlServer(_connectionString);
+                }
             }
         }
 

@@ -2,7 +2,7 @@
 
 namespace Recodme.ShokuDex.Data.UserInfo
 {
-    public class Role : IdentityRole<int>
+    public class ShokuDexRole : IdentityRole<int>
     {
     }
 }

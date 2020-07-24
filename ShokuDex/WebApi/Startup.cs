@@ -2,13 +2,17 @@ using System;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO;
 using Recodme.ShokuDex.Data.UserInfo;
+using Recodme.ShokuDex.DataAccess.Contexts;
 using Recodme.ShokuDex.WebApi.Options;
 
 namespace Recodme.ShokuDex.WebApi
@@ -25,6 +29,30 @@ namespace Recodme.ShokuDex.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
+            services.AddMemoryCache();
+            //Politicas de cookies
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
+
+            //Definição da identidade
+            services.AddIdentity<User, ShokuDexRole>(
+                options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                }).AddEntityFrameworkStores<FoodLogContext>();
+
+            //Definição da base de dados para autenticação e autorização
+            services.AddDbContext<FoodLogContext>(
+                options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("Default"));
+                });
+
             services.AddControllersWithViews();
             services.AddSwaggerGen(
                 (x) =>
@@ -32,7 +60,8 @@ namespace Recodme.ShokuDex.WebApi
                     x.SwaggerDoc("v1", new OpenApiInfo() { Title = "ShokuDex", Version = "v1" });
                 });
 
-            //services.AddCors(x => x.AddPolicy("default", (builder) => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //needed if aplication is in a different domain than api
+            //CORS irresponsável
+            services.AddCors(x => x.AddPolicy("Default", (builder) => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -48,7 +77,7 @@ namespace Recodme.ShokuDex.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<ShokuDexRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -71,12 +100,14 @@ namespace Recodme.ShokuDex.WebApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
             app.UseAuthentication();
 
 
             app.UseAuthorization();
-
+            SetupRolesAndUsers(userManager, roleManager);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -85,14 +116,19 @@ namespace Recodme.ShokuDex.WebApi
             });
         }
 
-        public void SetupRolesAndUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+        public void SetupRolesAndUsers(UserManager<User> userManager, RoleManager<ShokuDexRole> roleManager)
         {
-            if (roleManager.FindByNameAsync("Admin").Result == null) roleManager.CreateAsync(new Role() { Name = "Admin" }).Wait();
-            if (roleManager.FindByNameAsync("User").Result == null) roleManager.CreateAsync(new Role() { Name = "User" }).Wait();
-            //if (roleManager.FindByNameAsync("Nutricionist").Result == null) roleManager.CreateAsync(new Role() { Name = "Nutricionist" }).Wait();
-            //var profile = new Profile(DateTime.Now, "Administrator", "", 0000000, 0);
-            //var abo = new AccountBusinessController(userManager, roleManager);
-            //var res = abo.Register("Admin", "admin@shokuDex.com", "Admin123!#", profile, "Admin").Result;
+            if (roleManager.FindByNameAsync("Admin").Result == null) roleManager.CreateAsync(new ShokuDexRole() { Name = "Admin" }).Wait();
+            if (roleManager.FindByNameAsync("User").Result == null) roleManager.CreateAsync(new ShokuDexRole() { Name = "User" }).Wait();
+            if (roleManager.FindByNameAsync("Nutricionist").Result == null) roleManager.CreateAsync(new ShokuDexRole() { Name = "Nutricionist" }).Wait();
+            if (userManager.FindByNameAsync("admin").Result == null)
+            {
+                var profile = new Profiles("Administrator", "", "Neutral", 100.00, DateTime.Now, "admin@shokudex.com", "", "", 0);
+                var abo = new AccountBusinessObject(userManager, roleManager);
+                var res = abo.Register("Admin", "Admin123!#", profile, "Admin").Result;
+                var roleRes = userManager.AddToRoleAsync(userManager.FindByNameAsync("admin").Result, "Admin");
+            }
+
         }
     }
 }

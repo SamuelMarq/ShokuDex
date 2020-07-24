@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
-using Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO;
+using Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;
 
