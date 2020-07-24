@@ -25,7 +25,7 @@
             @foreach (var food in Model)
             {
                 <tr>
-                    <td><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Name)</a></td>
+                    <td><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id" id="name">@Html.DisplayFor(x => food.Key.Name)</a></td>
                     <td  class="text-right"><a class="foodT" asp-action="Details"asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Fats) g</a></td>
                     <td class="text-right"><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Carbohydrates) g</a></td>
                     <td class="text-right"><a class="foodT" asp-action="Details" asp-route-id="@food.Key.Id">@Html.DisplayFor(x => food.Key.Protein) g</a></td>
@@ -80,14 +80,17 @@
 </script>
 
 <style>
-    a.foodT, a.foodT:link, a.foodT:visited, a.foodT:hover {
+
+    a.foodT, a.foodT:link, a.foodT:visited, a.foodT:hover 
+    {
         font-family: Calibri;
         font-size: 20px;
-        color: #000000;
         text-decoration: none;
+        color: #000000;
     }
 
-    a.insert, a.insert:link, a.insert:visited, a.insert:hover {
+    a.insert, a.insert:link, a.insert:visited, a.insert:hover
+    {
         font-family: Calibri;
         font-size: 25px;
         font-weight:bold;
@@ -98,7 +101,11 @@
         border-radius: 5px;
     }
 
-    .dataTables_wrapper {
-        z-index:-1;
+ 
+    #name
+    {
+        color:darkblue;
+        font-weight:700;
     }
+   
 </style>

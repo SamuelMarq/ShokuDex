@@ -59,9 +59,10 @@ html
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+body
+{
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
   
 }
 
@@ -79,7 +80,8 @@ body {
     bottom: 0px;
 }
 
-.sidebarElement > a, .sidebarElement > a:link, .sidebarElement > a:visited, .sidebarElement > a:hover {
+.sidebarElement > a, .sidebarElement > a:link, .sidebarElement > a:visited, .sidebarElement > a:hover 
+{
     font-family: Calibri;
     font-size: 25px;
     border: 5px;
@@ -103,6 +105,9 @@ body {
    
 }
 
+#aiai{
+    z-index: -2;
+}
 #admin
 {
     padding-right:46px;
