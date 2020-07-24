@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Portion (g)</th>
                 <th>Fats (g)</th>
                 <th>Carbohydrates (g)</th>
                 <th>Protein (g)</th>
@@ -25,7 +26,7 @@
         <tbody>
 
             @{
-                var foodIds = Model.Where(meal => meal.Day == ViewBag.Day && meal.TimeOfDayId == ViewBag.TimeOfDay.Id).ToList();
+                var mealIds = Model.Where(meal => meal.Day == ViewBag.Day && meal.TimeOfDayId == ViewBag.TimeOfDay.Id).ToList();
             }
             @foreach (var item in Model)
             {
@@ -35,6 +36,7 @@
                 <tr>
 
                     <td>@food.Name</td>
+                    <td>@item.Portion</td>
                     <td>@food.Fats</td>
                     <td>@food.Carbohydrates</td>
                     <td>@food.Protein</td>
@@ -47,58 +49,68 @@
         <tfoot>
             <tr>
                 @{
-                    var foods = foodList.Where(f => foodIds.Select(y => y.FoodId).ToList().Contains(f.Id));
+                    var foods = foodList.Where(f => mealIds.Select(y => y.FoodId).ToList().Contains(f.Id));
                 }
                 <td>Total</td>
+
+                <td>
+                    @{
+                        var sumPort = 0.0;
+
+
+                        sumPort += mealIds.Sum(x => x.Portion);
+                    }
+                    @Math.Round(sumPort, 2) 
+                </td>
                 <td>
                     @{
                         var sumFats = 0.0;
                         foreach (var prod in foods)
                         {
-                            sumFats += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Fats / 100;
+                            sumFats += mealIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Fats / 100;
                         }
                     }
-                    @Math.Round(sumFats, 2) g
+                    @Math.Round(sumFats, 2) 
                 </td>
                 <td>
                     @{
                         var sumCar = 0.0;
                         foreach (var prod in foods)
                         {
-                            sumCar += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Carbohydrates / 100;
+                            sumCar += mealIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Carbohydrates / 100;
                         }
                     }
-                    @Math.Round(sumCar, 2) g
+                    @Math.Round(sumCar, 2) 
                 </td>
                 <td>
                     @{
                         var sumPro = 0.0;
                         foreach (var prod in foods)
                         {
-                            sumPro += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Protein / 100;
+                            sumPro += mealIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Protein / 100;
                         }
                     }
-                    @Math.Round(sumPro, 2) g
+                    @Math.Round(sumPro, 2) 
                 </td>
                 <td>
                     @{
                         var sumAlc = 0.0;
                         foreach (var prod in foods)
                         {
-                            sumAlc += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Alcohol / 100;
+                            sumAlc += mealIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Alcohol / 100;
                         }
                     }
-                    @Math.Round(sumAlc, 2) g
+                    @Math.Round(sumAlc, 2) 
                 </td>
                 <td>
                     @{
                         var sumCal = 0.0;
                         foreach (var prod in foods)
                         {
-                            sumCal += foodIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
+                            sumCal += mealIds.Where(x => x.FoodId == prod.Id).Sum(x => x.Portion) * prod.Calories / 100;
                         }
                     }
-                    @Math.Round(sumCal, 2) kcal
+                    @Math.Round(sumCal, 2) 
                 </td>
                 <td></td>
 
