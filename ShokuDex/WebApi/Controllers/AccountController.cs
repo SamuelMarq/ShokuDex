@@ -51,9 +51,8 @@ namespace Recodme.ShokuDex.WebApi.Controllers
             var profile = new Profiles(vm.Name, vm.Description, vm.Gender, vm.Height, vm.BirthDate, vm.Email, vm.Photo, vm.License, 0);
             //var profileCreation = await _pbo.CreateAsync(profile);
             //if (!profileCreation.Success) return View("Error", new ErrorViewModel() { RequestId = profileCreation.Exception.Message });
-            var registerOperation = await accountBo.Register(vm.UserName, vm.Password, profile, vm.Role);
-            ViewData["Res"] = registerOperation.Message;
-            return View(vm);
+            var registerOperation = await accountBo.Register(vm.UserName, vm.Password, profile, "User");
+            return RedirectToAction(nameof(Index), "Home");
         }
 
 
