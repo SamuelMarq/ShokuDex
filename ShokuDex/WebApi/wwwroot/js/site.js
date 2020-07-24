@@ -37,8 +37,8 @@ function checkCookie()
 {
     var sidebar = getCookie("sidebar");
     if (sidebar == 'on') {
-        $('#sidebar').remove('active');
-        $('#content').remove('active');
+        $('#sidebar').removeClass('active');
+        $('#content').removeClass('active');
     } else {
         $('#sidebar').addClass('active');
         $('#content').addClass('active');
