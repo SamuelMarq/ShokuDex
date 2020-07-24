@@ -1,11 +1,14 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Recodme.ShokuDex.Data.UserInfo;
 using Recodme.ShokuDex.WebApi.Options;
 
 namespace Recodme.ShokuDex.WebApi
@@ -45,7 +48,7 @@ namespace Recodme.ShokuDex.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +72,7 @@ namespace Recodme.ShokuDex.WebApi
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
 
 
             app.UseAuthorization();
@@ -80,6 +83,16 @@ namespace Recodme.ShokuDex.WebApi
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public void SetupRolesAndUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+        {
+            if (roleManager.FindByNameAsync("Admin").Result == null) roleManager.CreateAsync(new Role() { Name = "Admin" }).Wait();
+            if (roleManager.FindByNameAsync("User").Result == null) roleManager.CreateAsync(new Role() { Name = "User" }).Wait();
+            //if (roleManager.FindByNameAsync("Nutricionist").Result == null) roleManager.CreateAsync(new Role() { Name = "Nutricionist" }).Wait();
+            //var profile = new Profile(DateTime.Now, "Administrator", "", 0000000, 0);
+            //var abo = new AccountBusinessController(userManager, roleManager);
+            //var res = abo.Register("Admin", "admin@shokuDex.com", "Admin123!#", profile, "Admin").Result;
         }
     }
 }

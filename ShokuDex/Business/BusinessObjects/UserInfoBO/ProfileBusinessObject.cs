@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoDAO
+namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO
 {
     public class ProfilesBusinessObject
     {
