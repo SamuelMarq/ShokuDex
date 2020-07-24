@@ -1,7 +1,37 @@
-﻿<a asp-action="index" asp-controller="Meal">Meal</a>
-<br>
-<a asp-action="index" asp-controller="TimeOfDay">Time Of Day</a>
-<br>
-<a asp-action="index" asp-controller="Category">Category</a>
-<br>
-<a asp-action="index" asp-controller="Food">Food</a>
+﻿<div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mb-4">
+        <div class="card square-button-responsive text-white bg-phthalo-green">
+            <a asp-action="Index" asp-controller="Meal">
+                <i class="fas fa-utensils"></i>
+                <p>Meal</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mb-4">
+        <div class="card square-button-responsive text-white bg-phthalo-green">
+            <a asp-action="Index" asp-controller="TimeOfDay">
+                <i class="fas fa-clock mb-2"></i>
+                <p>Time Of Day</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mb-4">
+        <div class="card square-button-responsive text-white bg-phthalo-green">
+            <a asp-action="Index" asp-controller="Category">
+                <i class="fas fa-th-large"></i>
+                <p>Category</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mb-4">
+        <div class="card square-button-responsive text-white bg-phthalo-green">
+            <a asp-action="Index" asp-controller="Food">
+                <i class="fad fa-fish-cooked"></i>
+                <p>Food</p>
+            </a>
+        </div>
+    </div>
+</div>

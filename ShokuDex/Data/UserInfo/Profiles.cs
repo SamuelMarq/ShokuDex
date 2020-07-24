@@ -115,5 +115,15 @@ namespace Recodme.ShokuDex.Data.UserInfo
             _license = license;
             _numberOfPatients = numberOfPatients;
         }
+
+        public Profiles(string name, string description, string gender, double height, DateTime birthDate, string email, string photo, string license) : base(name, description)
+        {
+            _gender = gender;
+            _height = height;
+            _birthDate = birthDate;
+            _email = email;
+            _photo = photo;
+            _license = license;
+        }
     }
 }
