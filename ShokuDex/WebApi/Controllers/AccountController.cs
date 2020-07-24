@@ -49,8 +49,6 @@ namespace Recodme.ShokuDex.WebApi.Controllers
         {
             var accountBo = new AccountBusinessObject(UserManager, RoleManager);
             var profile = new Profiles(vm.Name, vm.Description, vm.Gender, vm.Height, vm.BirthDate, vm.Email, vm.Photo, vm.License, 0);
-            //var profileCreation = await _pbo.CreateAsync(profile);
-            //if (!profileCreation.Success) return View("Error", new ErrorViewModel() { RequestId = profileCreation.Exception.Message });
             var registerOperation = await accountBo.Register(vm.UserName, vm.Password, profile, "User");
             return RedirectToAction(nameof(Index), "Home");
         }
@@ -68,8 +66,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
             var loginOperation = await SignInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
-            if (!loginOperation.Succeeded) ViewData["Res"] = "Login Failed";
-            return View(vm);
+            return RedirectToAction(nameof(Index), "Home");
         }
 
 
