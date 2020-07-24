@@ -11,24 +11,25 @@
     <a asp-action="New"><i class="fas fa-plus">Register meal</i></a>
 </p>
 
-<a asp-action="index" asp-route-week="@((int)ViewData["week"] - 1)">Previous Week</a>
-<a asp-action="index" asp-route-week="@((int)ViewData["week"] + 1)">Next Week</a>
+<a asp-action="index" asp-route-week="@((int)ViewData["week"] - 1)" id="previous"><i class="fa fa-chevron-circle-left"></i>Previous Week</a>
+
+<a asp-action="index" asp-route-week="@((int)ViewData["week"] + 1)" id="next">Next Week<i class="fa fa-chevron-circle-right"></i></a>
 
 <div class="table-responsive">
     <table class="table" id="listTable">
         <thead>
             <tr>
                 <th>
-                @{
-                    if (ViewBag.WeekDay[0].ToString("yyyy")== ViewBag.WeekDay[6].ToString("yyyy"))
-                    {
-                        @ViewBag.WeekDay[0].ToString("yyyy");
+                    @{
+                        if (ViewBag.WeekDay[0].ToString("yyyy") == ViewBag.WeekDay[6].ToString("yyyy"))
+                        {
+                            @ViewBag.WeekDay[0].ToString("yyyy");
+                        }
+                        else
+                        {
+                            @ViewBag.WeekDay[0].ToString("yyyy") @Html.Raw("/") @ViewBag.WeekDay[6].ToString("yyyy");
+                        }
                     }
-                    else
-                    {
-                        @ViewBag.WeekDay[0].ToString("yyyy") @Html.Raw("/") @ViewBag.WeekDay[6].ToString("yyyy");
-                    }
-                }
                 </th>
                 <th scope="col">@ViewBag.WeekDay[0].ToString("dd/MM")</th>
                 <th scope="col">@ViewBag.WeekDay[1].ToString("dd/MM")</th>
@@ -960,7 +961,11 @@
 
 <style>
     .clink {
+        cursor: pointer;
+    }
 
-        cursor:pointer;
+    #next
+    {
+        float: right;
     }
 </style>

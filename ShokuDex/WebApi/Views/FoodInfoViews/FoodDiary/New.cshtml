@@ -3,47 +3,59 @@
 
 @{ViewData["Title"] = "New"; }
 
-<h2>Meal - New</h2>
 
-<div class="row">
-    <form asp-action="New">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Day" class="control-label"></label>
-            <input asp-for="Day" class="form-control" type="date"/>
-            <span asp-validation-for="Day" class="text-danger"></span>
+
+<div class="card">
+    <div class="card-header bg-greenish-green">
+
+        <h2 class="float-left">
+            @ViewData["Title"]
+
+        </h2>
+    </div>
+
+        <div class="card-body">
+            <div class="row">
+                <form asp-action="New">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Day" class="control-label"></label>
+                        <input asp-for="Day" class="form-control" type="date" />
+                        <span asp-validation-for="Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Portion" class="control-label"></label>
+                        <input asp-for="Portion" class="form-control" type="number" />
+                        <span asp-validation-for="Portion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FoodId" class="control-label"></label>
+                        <select asp-items="@ViewBag.Foods" asp-for="FoodId" class="form-control sel2-select"><option></option></select>
+                        <span asp-validation-for="FoodId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TimeOfDayId" class="control-label"></label>
+                        <select asp-items="@ViewBag.TimesOfDay" asp-for="TimeOfDayId" class="form-control sel2-select"><option></option></select>
+                        <span asp-validation-for="TimeOfDayId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <a asp-action="Index" asp-controller="FoodDiary" class="btn btn-danger">Back</a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Portion" class="control-label"></label>
-            <input asp-for="Portion" class="form-control" type="number" />
-            <span asp-validation-for="Portion" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="FoodId" class="control-label"></label>
-            <select asp-items="@ViewBag.Foods" asp-for="FoodId" class="form-control sel2-select"><option></option></select>
-            <span asp-validation-for="FoodId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="TimeOfDayId" class="control-label"></label>
-            <select asp-items="@ViewBag.TimesOfDay" asp-for="TimeOfDayId" class="form-control sel2-select"><option></option></select>
-            <span asp-validation-for="TimeOfDayId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" asp-controller="FoodDiary" class="btn btn-danger">Back</a>
-        </div>
-    </form>
+    
 </div>
+    @section Scripts{
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 
-@section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
-<script>
-    $(document).ready(function () {
-        $('.sel2-select').select2({
-            placeholder: "Select a value",
-            allowClear: true
+    <script>
+        $(document).ready(function () {
+            $('.sel2-select').select2({
+                placeholder: "Select a value",
+                allowClear: true
+            });
         });
-    });
-</script>
+    </script>
