@@ -181,14 +181,13 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO
 
         #region List
 
-        public OperationResult<List<Profiles>> List()
+        public OperationResult<List<Profiles>> FullList()
         {
             try
             {
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
-                    var list = _dao.List();
-                    var res = (List<Profiles>)list.Where(x => !x.IsDeleted);
+                    var res = _dao.List();
                     scope.Complete();
                     return new OperationResult<List<Profiles>>() { Success = true, Result = res };
                 }
@@ -199,14 +198,49 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO
             }
         }
 
-        public async Task<OperationResult> ListAsync()
+        public async Task<OperationResult<List<Profiles>>> FullListAsync()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var res = await _dao.ListAsync();
+                    scope.Complete();
+                    return new OperationResult<List<Profiles>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Profiles>>() { Success = false, Exception = e };
+            }
+        }
+
+        public OperationResult<List<Profiles>> List()
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    var list = _dao.List();
+                    var res = list.Where(x => !x.IsDeleted).ToList();
+                    scope.Complete();
+                    return new OperationResult<List<Profiles>>() { Success = true, Result = res };
+                }
+            }
+            catch (Exception e)
+            {
+                return new OperationResult<List<Profiles>>() { Success = false, Exception = e };
+            }
+        }
+
+        public async Task<OperationResult<List<Profiles>>> ListAsync()
         {
             try
             {
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     var list = await _dao.ListAsync();
-                    var res = (List<Profiles>)list.Where(x => !x.IsDeleted);
+                    var res = list.Where(x => !x.IsDeleted).ToList();
                     scope.Complete();
                     return new OperationResult<List<Profiles>>() { Success = true, Result = res };
                 }

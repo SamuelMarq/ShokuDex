@@ -18,10 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Api\Other\" />
-    <Folder Include="Controllers\Api\UserInfo\" />
-    <Folder Include="Controllers\Web\UserInfo\" />
     <Folder Include="Models\Other\" />
-    <Folder Include="Views\UserInfoViews\" />
   </ItemGroup>
 
   <ItemGroup>
