@@ -13,13 +13,13 @@
     <table class="table" id="listTable">
         <thead>
             <tr>
-                <th></th>
-                <th>Fats</th>
-                <th>Carbohydrates</th>
-                <th>Protein</th>
-                <th>Alcohol</th>
-                <th>Calories</th>
-                <th></th>
+                <th>Name</th>
+                <th>Fats (g)</th>
+                <th>Carbohydrates (g)</th>
+                <th>Protein (g)</th>
+                <th>Alcohol (g)</th>
+                <th>Calories (kcal)</th>
+                <th class="no-sort"></th>
             </tr>
         </thead>
         <tbody>
@@ -40,11 +40,11 @@
                     <td>@food.Protein</td>
                     <td>@food.Alcohol</td>
                     <td>@food.Calories</td>
-                    <td></td>
+                    <td class="no-sort"></td>
                 </tr>
-
             }
-
+        </tbody>
+        <tfoot>
             <tr>
                 @{
                     var foods = foodList.Where(f => foodIds.Select(y => y.FoodId).ToList().Contains(f.Id));
@@ -103,7 +103,19 @@
                 <td></td>
 
             </tr>
-        </tbody>
+        </tfoot>
     </table>
 </div>
 <a asp-action="Index" asp-controller="FoodDiary" class="btn btn-danger">Back</a>
+
+<script>
+    $(document).ready(function () {
+        $('#listTable').DataTable({
+            "order": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+        });
+    });
+</script>
