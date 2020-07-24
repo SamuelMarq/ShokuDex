@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
+using Recodme.ShokuDex.Business.OperationResults;
+using Recodme.ShokuDex.Data.FoodInfo;
+using Recodme.ShokuDex.Data.UserInfo;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;
 
@@ -17,12 +22,25 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
     {
         private readonly FoodsBusinessObject _fbo = new FoodsBusinessObject();
         private readonly CategoriesBusinessObject _cbo = new CategoriesBusinessObject();
+        private readonly UserManager<User> _uManager;
+        public FoodController(UserManager<User> uManager)
+        {
+            _uManager = uManager;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var listOperation = await _fbo.FilterAsync(x => x.isGlobal==... || x.ProfileId == ...);
-            var listOperation = await _fbo.ListAsync();
+            Func<Foods, bool> condition;
+            if (!User.Identity.IsAuthenticated) condition = x => x.IsGlobal == true;
+            else
+            {
+                var userId = (await _uManager.FindByNameAsync(User.Identity.Name)).ProfileId;
+                condition = x => x.IsGlobal == true || x.ProfileId == userId;
+            }
+
+            var listOperation = await _fbo.FilterAsync(condition);
+            //var listOperation = await _fbo.ListAsync();
             if (!listOperation.Success) return View("Error", new ErrorViewModel() { RequestId = listOperation.Exception.Message });
             var dic = new Dictionary<FoodViewModel,string>();
             foreach (var item in listOperation.Result)
@@ -60,6 +78,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("insert")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Insert()
         {
             var listOperation = await _cbo.ListAsync();
@@ -75,10 +94,15 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost("insert")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin, User")]
         public async Task<IActionResult> Insert(FoodViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                if (User.IsInRole("Admin")) vm.IsGlobal = true;
+                else if (User.IsInRole("User")) vm.IsGlobal = false;
+                vm.Calories = 0;
+                vm.ProfileId = (await _uManager.FindByNameAsync(User.Identity.Name)).ProfileId;
                 var f = vm.ToFood();
                 var createOperation = await _fbo.CreateAsync(f);
                 if (!createOperation.Success) return View("Error", new ErrorViewModel() { RequestId = createOperation.Exception.Message });
@@ -88,6 +112,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("edit/{id}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
@@ -110,6 +135,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 
         [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Edit(Guid id, FoodViewModel vm)
         {
             if (ModelState.IsValid)
@@ -133,6 +159,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("Delete/{id}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
