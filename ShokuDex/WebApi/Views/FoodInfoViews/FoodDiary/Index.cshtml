@@ -26,7 +26,7 @@
         <tr>
             <th scope="row">Morning</th>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[0].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         var foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                         Func<FoodViewModel, bool> condition0 = (food => foodid0.Select(x => x.FoodId).Contains(food.Id));
@@ -38,19 +38,19 @@
                             if (item == baglist.Where(condition0).ToList()[2])
                             {
                                 <li>
-                                    ...
+                                   ...
                                 </li>
                                 break;
                             }
                         }
                         <li>
-                            <a href="FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[0].Id&date=@ViewBag.WeekDay[0].Date">@item.Name</a>
+                            @item.Name
                         </li>
                     }
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[1].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -73,7 +73,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[2].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -96,7 +96,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0"  onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[3].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -119,7 +119,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[4].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -142,7 +142,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0"  onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[5].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -165,7 +165,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[6].Id&date=@ViewBag.WeekDay[0].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[0].Id);
                     }
@@ -191,7 +191,7 @@
         <tr>
             <th scope="row">Lunch</th>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[0].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -214,7 +214,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[1].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -237,7 +237,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[2].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -260,7 +260,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[3].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[3] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -283,7 +283,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0"  onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[4].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[4] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -306,7 +306,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[5].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[5] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -329,7 +329,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[6].Id&date=@ViewBag.WeekDay[1].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[6] && meal.TimeOfDayId == ViewBag.TimesOfDay[1].Id);
                     }
@@ -355,7 +355,7 @@
         <tr>
             <th scope="row">Afternoon</th>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[0].Id&date=@ViewBag.WeekDay[2].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[0] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
                     }
@@ -378,7 +378,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[1].Id&date=@ViewBag.WeekDay[2].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[1] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
                     }
@@ -401,7 +401,7 @@
                 </ul>
             </td>
             <td>
-                <ul class="pl-0">
+                <ul class="pl-0" onclick="location.href='FoodDiary/Details?timeOfDay=@ViewBag.TimesOfDay[2].Id&date=@ViewBag.WeekDay[2].Date'">
                     @{
                         foodid0 = Model.Where(meal => meal.Day == ViewBag.WeekDay[2] && meal.TimeOfDayId == ViewBag.TimesOfDay[2].Id);
                     }
