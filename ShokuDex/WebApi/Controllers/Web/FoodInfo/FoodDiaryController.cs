@@ -56,8 +56,9 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             return TimeOfDayViewModel.Parse(getOperation.Result);
         }
 
+        //[HttpGet("index/{week}")]
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? week=0)
         {
             //var fIds = listOperation.Result.Select(x => x.FoodId).Distinct().ToList();
             //var todIds = listOperation.Result.Select(x => x.TimeOfDayId).Distinct().ToList();
@@ -65,7 +66,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             DateTime today = DateTime.Today;
             int currentDayOfWeek = (int)today.DayOfWeek;
             DateTime sunday = today.AddDays(-currentDayOfWeek);
-            DateTime monday = sunday.AddDays(1);
+            DateTime monday = sunday.AddDays(1+(double)week*7);
             if (currentDayOfWeek == 0)
             {
                 monday = monday.AddDays(-7);
@@ -100,7 +101,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             }
             ViewBag.TimesOfDay = tods.ToList();
 
-            //ViewData["TimeOfDay"] = await GetTimeOfDayViewModels();
+            ViewData["week"] = week;
             return View(lst);
         }
 

@@ -1,6 +1,6 @@
 ﻿@using Recodme.ShokuDex.WebApi.Models.FoodInfo
 @model List<MealViewModel>
-@{ 
+@{
     var baglist = (List<FoodViewModel>)ViewBag.Foods;
 }
 
@@ -11,11 +11,25 @@
     <a asp-action="New"><i class="fas fa-plus">Register meal</i></a>
 </p>
 
+<a asp-action="index" asp-route-week="@((int)ViewData["week"] - 1)">Previous Week</a>
+<a asp-action="index" asp-route-week="@((int)ViewData["week"] + 1)">Next Week</a>
+
 <div class="table-responsive">
     <table class="table" id="listTable">
         <thead>
             <tr>
-                <td></td>
+                <th>
+                @{
+                    if (ViewBag.WeekDay[0].ToString("yyyy")== ViewBag.WeekDay[6].ToString("yyyy"))
+                    {
+                        @ViewBag.WeekDay[0].ToString("yyyy");
+                    }
+                    else
+                    {
+                        @ViewBag.WeekDay[0].ToString("yyyy") @Html.Raw("/") @ViewBag.WeekDay[6].ToString("yyyy");
+                    }
+                }
+                </th>
                 <th scope="col">@ViewBag.WeekDay[0].ToString("dd/MM")</th>
                 <th scope="col">@ViewBag.WeekDay[1].ToString("dd/MM")</th>
                 <th scope="col">@ViewBag.WeekDay[2].ToString("dd/MM")</th>
@@ -847,9 +861,9 @@
                     </ul>
                 </td>
                 @*<td>
-                <a asp-action="edit" asp-route-id="@meal.id"><i class="fas fa-edit text-secondary"></i></a>
-                <a asp-action="delete" asp-route-id="@meal.id"><i class="fas fa-trash text-danger"></i></a>
-                </td>*@
+                    <a asp-action="edit" asp-route-id="@meal.id"><i class="fas fa-edit text-secondary"></i></a>
+                    <a asp-action="delete" asp-route-id="@meal.id"><i class="fas fa-trash text-danger"></i></a>
+                    </td>*@
             </tr>
         </tbody>
         <tfoot>
@@ -946,6 +960,5 @@
 
 <style>
     .clink {
-
     }
 </style>
