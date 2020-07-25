@@ -31,7 +31,7 @@ namespace Recodme.ShokuDex.DataAccess.Contexts
             {
                 if (_connectionString == string.Empty)
                 {
-                    optionsBuilder.UseSqlServer(Resources.ConnectionString);
+                    optionsBuilder.UseSqlServer(Resources.OnlineConnectionString);
                 }
                 else
                 {

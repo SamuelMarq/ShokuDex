@@ -11,7 +11,7 @@ namespace Recodme.ShokuDex.App
         static async System.Threading.Tasks.Task Main(string[] args)
         {
             var ctx = new FoodLogContext();
-            ctx.Database.EnsureDeleted();
+            //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
             Console.WriteLine("Done!");
 /*            FoodsBusinessObject _fbo = new FoodsBusinessObject();

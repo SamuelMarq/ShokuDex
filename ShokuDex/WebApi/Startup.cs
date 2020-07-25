@@ -50,7 +50,7 @@ namespace Recodme.ShokuDex.WebApi
             services.AddDbContext<FoodLogContext>(
                 options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("Default"));
+                    options.UseSqlServer(Configuration.GetConnectionString("Online"));
                 });
 
             services.AddControllersWithViews();
