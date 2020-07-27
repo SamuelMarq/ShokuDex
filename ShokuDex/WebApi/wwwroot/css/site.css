@@ -221,3 +221,37 @@ body
     background-color: #97CC00;
     border-color: #97CC00;
 }
+
+.square-button-responsive {
+    width: 100%;
+    overflow: hidden;
+}
+
+    .square-button-responsive > a {
+        position: absolute;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        background-color: #DAE120;
+    }
+
+.square-button-responsive > a > p {
+    font-size: 1.2em;
+}
+
+.square-button-responsive > a > svg {
+    font-size: 2em;
+}
+
+.square-button-responsive:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
