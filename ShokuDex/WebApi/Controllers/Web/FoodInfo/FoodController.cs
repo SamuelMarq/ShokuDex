@@ -32,11 +32,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         public async Task<IActionResult> Index()
         {
             Func<Foods, bool> condition;
-            if (!User.Identity.IsAuthenticated) condition = x => x.IsGlobal == true;
+            if (!User.Identity.IsAuthenticated) condition = x => x.IsGlobal == true && x.IsDeleted==false;
             else
             {
                 var userId = (await _uManager.FindByNameAsync(User.Identity.Name)).ProfileId;
-                condition = x => x.IsGlobal == true || x.ProfileId == userId;
+                condition = x =>  x.IsDeleted == false && (x.IsGlobal == true || x.ProfileId == userId);
             }
 
             var listOperation = await _fbo.FilterAsync(condition);
@@ -140,7 +140,11 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         {
             if (ModelState.IsValid)
             {
-                if(id == null) return NotFound();
+                if (User.IsInRole("Admin")) vm.IsGlobal = true;
+                else if (User.IsInRole("User")) vm.IsGlobal = false;
+                vm.Calories = 0;
+
+                if (id == null) return NotFound();
 
                 var getOperation = await _fbo.ReadAsync((Guid)id);
                 if (!getOperation.Success) return View("Error", new ErrorViewModel() { RequestId = getOperation.Exception.Message });
