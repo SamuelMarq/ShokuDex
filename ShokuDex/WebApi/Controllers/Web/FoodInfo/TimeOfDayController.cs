@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
@@ -41,6 +42,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("new")]
+        [Authorize(Roles = "Admin")]
         public IActionResult New()
         {
             return View();
@@ -62,6 +64,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
@@ -97,6 +100,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("Delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();

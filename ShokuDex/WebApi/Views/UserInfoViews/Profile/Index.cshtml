@@ -1,7 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@using Recodme.ShokuDex.WebApi.Models.UserInfo
+@model IEnumerable<ProfileViewModel>
 
-<h1>Index</h1>
+<h2>Profiles</h2>
+
+<p>
+    <a asp-action="New"><i class="fas fa-plus">New</i></a>
+</p>
 

@@ -8,6 +8,7 @@ using Recodme.ShokuDex.Business.BusinessObjects.FoodInfoBO;
 using Recodme.ShokuDex.WebApi.SupportMethods;
 using Recodme.ShokuDex.WebApi.Models.FoodInfo;
 using WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
 {
@@ -43,6 +44,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("new")]
+        [Authorize(Roles = "Admin")]
         public IActionResult New()
         {
             return View();
@@ -64,6 +66,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
@@ -99,6 +102,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
         }
 
         [HttpGet("Delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
