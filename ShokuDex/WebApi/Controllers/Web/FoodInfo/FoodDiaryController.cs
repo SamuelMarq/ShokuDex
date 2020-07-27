@@ -74,7 +74,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             var weekDays = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
             ViewBag.WeekDay = weekDays;
 
-            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day >= weekDays[0] && x.Day <= weekDays[6]);
+            var dlistOperation = await _bo.FilterAsync(x => x.ProfileId == new Guid("00000000-0000-0000-0000-000000000001") && x.Day >= weekDays[0] && x.Day <= weekDays[6] && x.IsDeleted==false);
             if (!dlistOperation.Success) return View("Error", new ErrorViewModel() { RequestId = dlistOperation.Exception.Message });
 
             var lst = new List<MealViewModel>();
@@ -216,7 +216,7 @@ namespace Recodme.ShokuDex.WebApi.Controllers.Web.FoodInfo
             var guidToTest = new Guid("00000000-0000-0000-0000-000000000001");
             //var guid = Guid.Parse(timeofday);
             //var dateResult = DateTime.Parse(date);
-            return guidToTest == meal.ProfileId && meal.Day.Year == dateResult.Year && meal.Day.DayOfYear == dateResult.DayOfYear && timeofday == meal.TimeOfDayId;
+            return guidToTest == meal.ProfileId && meal.Day.Year == dateResult.Year && meal.Day.DayOfYear == dateResult.DayOfYear && timeofday == meal.TimeOfDayId && meal.IsDeleted==false;
         }
 
         [HttpGet("Details")]

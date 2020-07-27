@@ -95,17 +95,27 @@
                                 <a asp-action="Index" asp-controller="Food" id="foodTable"> Food Table</a>
                             </li>
 
-                            <li class="subMenu">
-                                <a asp-action="Insert" asp-controller="Food" id="insertFood"> Insert Food</a>
-                            </li>
+                            @if (User.IsInRole("User")|| User.IsInRole("Admin"))
+                            {
+                                <li class="subMenu">
+                                    <a asp-action="Insert" asp-controller="Food" id="insertFood"> Insert Food</a>
+                                </li>
+                            }
                         </ul>
                     </li>
-                    <li class="sidebarElement">
-                        <a asp-action="Index" asp-controller="FoodDiary" id="foodDiary">Food Diary</a>
-                    </li>
-                    <li class="sidebarElement">
-                        <a asp-action="Index" asp-controller="AdministratorOptions" id="admin">Administrator</a>
-                    </li>
+                    @if (User.IsInRole("User")|| User.IsInRole("Admin"))
+                    {
+                        <li class="sidebarElement">
+                            <a asp-action="Index" asp-controller="FoodDiary" id="foodDiary">Food Diary</a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="sidebarElement">
+                            <a asp-action="Index" asp-controller="AdministratorOptions" id="admin">Administrator</a>
+                        </li>
+                    }
                     <li class="sidebarElement">
                         <!--<a href="#">Reports</a>-->
                     </li>
