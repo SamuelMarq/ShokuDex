@@ -61,6 +61,7 @@ namespace Recodme.ShokuDex.Business.BusinessObjects.UserInfoBO
                     transactionScope.Dispose();
                     return new OperationResult() { Success = false, Message = $"Role {role} does not exist" };
                 }
+                await UserManager.AddToRoleAsync(admin, roleData.Name);
                 transactionScope.Complete();
                 return new OperationResult() { Success = true };
             }
